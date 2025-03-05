@@ -23,6 +23,9 @@
     flex-direction: column;
   }
   &__item {
+  }
+
+  &__link {
     border: 1px solid aqua;
     width: 48px;
     height: 48px;
@@ -30,9 +33,6 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-  }
-
-  &__link {
   }
 
   &__item-image {

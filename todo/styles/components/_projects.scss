@@ -1,0 +1,231 @@
+.projects {
+  width: 325px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 40px;
+    h1 {
+      font-size: 30px;
+      color: var(--color-dark);
+    }
+  }
+
+  &__title {
+  }
+
+  &__top-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(28, 29, 34, 0.08);
+    color: var(--color-gray);
+    font-size: 20px;
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  &__main-team {
+  }
+
+  &__main-chapter {
+    margin-bottom: 16px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    position: relative;
+    align-items: center;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 7px;
+      background-color: var(--color-gray);
+      height: 1px;
+      right: 0;
+      rotate: -45deg;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      width: 7px;
+      background-color: var(--color-gray);
+      height: 1px;
+      right: 0px;
+      top: 8px;
+      rotate: 225deg;
+    }
+  }
+  &__main-title {
+    color: var(--color-dark);
+    font-family: var(--title-font);
+  }
+
+  &__main-btn {
+    padding: 5px 10px;
+    position: relative;
+    color: var(--color-gray);
+    border-radius: 18px;
+    transition: all 0.2s;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 2px;
+      left: -30px;
+      top: 50%;
+      background-color: rgba(28, 29, 34, 0.1);
+    }
+    @include hover {
+      background-color: var(--color-gray-ligth);
+      color: var(--color-dark);
+    }
+  }
+
+  &__acc {
+    overflow: hidden;
+  }
+
+  &__main-projects {
+  }
+
+  &__main-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-left: 2px solid rgba(28, 29, 34, 0.1);
+    padding-left: 30px;
+    padding-block: 10px;
+  }
+
+  &__main-item {
+  }
+
+  &__main-tasks {
+  }
+
+  &__theme {
+    width: 100%;
+    display: flex;
+    padding: 4px;
+  }
+
+  &__theme-light {
+  }
+
+  &__theme-dark {
+  }
+}
+
+.projects__main-chapter.active {
+  &::after {
+    content: "";
+    position: absolute;
+    width: 7px;
+    background-color: black;
+    height: 1px;
+    right: 0;
+    rotate: 220deg;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    width: 7px;
+    background-color: black;
+    height: 1px;
+    right: 0px;
+    top: 5px;
+    rotate: -220deg;
+  }
+}
+
+.projects__main-btn.active {
+  background-color: var(--color-gray-ligth);
+  color: var(--color-dark);
+}
+
+.ant-space,
+.ant-switch {
+  width: 100%;
+  height: 30px;
+}
+
+// .any {
+//   transform: scale(0);
+//   transition: transform 0.3s;
+// }
+
+// .any--entering {
+//   transform: scale(1);
+// }
+// .any--entered {
+//   transform: scale(1);
+// }
+// .my-node-enter {
+//   opacity: 0;
+// }
+// .my-node-enter-active {
+//   opacity: 1;
+//   transition: opacity 200ms;
+// }
+// .my-node-exit {
+//   opacity: 1;
+// }
+// .my-node-exit-active {
+//   opacity: 0;
+//   transition: opacity 200ms;
+// }
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.projects__acc {
+  display: none;
+}
+
+.projects__acc.active {
+  display: block;
+  animation: slideIn 0.5s;
+}
+
+.projects__acc.deactive {
+  display: block;
+  animation: slideOut 0.3s;
+}
+.hidden {
+  display: none !important;
+}

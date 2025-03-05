@@ -3,10 +3,10 @@ import Sider from "../components/Sider/Sider";
 
 function App() {
   return (
-    <wrapper className="wrapper">
+    <div className="wrapper">
       <Sider />
       <Projects />
-    </wrapper>
+    </div>
   );
 }
 
