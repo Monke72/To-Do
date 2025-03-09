@@ -98,3 +98,9 @@ $mobile-xs: 500px;
     }
   }
 }
+
+@mixin dark {
+  .wrapper.dark {
+    @content;
+  }
+}

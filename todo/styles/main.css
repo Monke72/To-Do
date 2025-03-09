@@ -260,6 +260,7 @@ p {
   --color-green: #78d700;
   --color-gray-alt: #888da7;
   --color-gray-ligth: rgb(136, 141, 167, 0.1);
+  --color-gray-any: rgba(255, 255, 255, 0.5);
   --main-font: "ExoTooSemiMed", sans-serif;
   --title-font: "ExoTooBold", sans-serif;
   --any-font: "ExoTooSemiBold", sans-serif;
@@ -306,6 +307,8 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: all 0.5s;
+  box-shadow: 14px -2px 19px -7px rgba(34, 35, 39, 0.11);
 }
 .projects__top {
   display: flex;
@@ -326,7 +329,7 @@ p {
   border-radius: 50%;
   background: rgba(28, 29, 34, 0.08);
   color: var(--color-gray);
-  font-size: 20px;
+  font-size: 19px;
 }
 .projects__main {
   display: flex;
@@ -479,4 +482,165 @@ p {
 
 .hidden {
   display: none !important;
+}
+
+.theme__label {
+  position: relative;
+  width: 265px;
+  height: 46px;
+  background-color: rgba(28, 29, 34, 0.04);
+  border-radius: 22px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.theme__label:after {
+  content: "";
+  width: 127px;
+  height: 34px;
+  position: absolute;
+  top: 6px;
+  left: 5px;
+  background: #fff;
+  border-radius: 18px;
+  transition: all 0.5s;
+}
+.theme__label span {
+  position: absolute;
+  width: 120px;
+  top: 20px;
+  z-index: 100;
+  top: 10px;
+  display: flex;
+  gap: 5px;
+}
+.theme__label .ligth__btn {
+  left: 40px;
+  fill: #000;
+  transition: 0.3s;
+}
+.theme__label .dark__btn {
+  right: -25px;
+  fill: #fff;
+  transition: 0.3s;
+}
+
+.darkmode__toggle {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+input:checked + .theme__label {
+  background: rgba(34, 35, 39, 0.9);
+}
+
+input:checked + .theme__label::after {
+  left: 243px;
+  transform: translateX(-100%);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.theme__label:active::after {
+  width: 140px;
+}
+
+input:checked + .theme__label .ligth__btn {
+  fill: #7e7e7e;
+}
+
+input:checked + .theme__label .dark__btn {
+  fill: #fff;
+}
+
+.wrapper.dark .projects {
+  background-color: #222327;
+}
+.wrapper.dark .projects__top h1,
+.wrapper.dark .projects__main-title.active {
+  color: var(--color-light);
+}
+.wrapper.dark .projects__main-title.deactive,
+.wrapper.dark .projects__acc p,
+.wrapper.dark .projects__acc button {
+  color: var(--color-gray-any);
+}
+.wrapper.dark .projects__main-list {
+  border-left: 2px solid var(--color-gray-any);
+}
+.wrapper.dark .projects__main-btn::before {
+  background-color: var(--color-gray-any);
+}
+.wrapper.dark .projects__main-chapter::after,
+.wrapper.dark .projects__main-chapter::before {
+  background-color: var(--color-gray-any);
+}
+.wrapper.dark .projects__top-btn {
+  color: var(--color-gray-any);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.wrapper.dark .theme__label {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+.wrapper.dark input:checked + .theme__label::after {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.base {
+  width: 100%;
+  padding: 32px;
+}
+.base__top {
+  display: flex;
+  flex-direction: column;
+}
+.base__header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 43px;
+}
+.base__header-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+}
+.base__header-icons__date {
+  display: flex;
+}
+.base__view {
+  display: flex;
+  border-bottom: 1px solid rgba(28, 29, 34, 0.08);
+}
+.base__view-board, .base__view-add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-inline: 14px;
+  padding-bottom: 19px;
+}
+@media (hover: hover) {
+  .base__view-board:hover, .base__view-add:hover {
+    border-bottom: 1px solid var(--color-dark);
+  }
+}
+@media (hover: none) {
+  .base__view-board:active, .base__view-add:active {
+    border-bottom: 1px solid var(--color-dark);
+  }
+}
+.base__view-board img, .base__view-add img {
+  width: 18px;
+  height: 24px;
+}
+.base__view-board span, .base__view-add span {
+  font-size: 17px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(28, 29, 34, 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-gray);
 }/*# sourceMappingURL=main.css.map */

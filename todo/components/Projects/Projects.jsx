@@ -1,15 +1,19 @@
-// import React, { useState } from "react";
-import plusIcon from "./../../icons/plus.svg";
-import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
-import { Space, Switch } from "antd";
 import { useState } from "react";
-import { Transition } from "react-transition-group";
-import ReactDOM from "react-dom";
+import React from "react";
+import { useContext } from "react";
+import { ThemeContext } from "./../../src/App";
+import dark from "./../../icons/dark.svg";
+import ligth from "./../../icons/light.svg";
+import ligthD from "./../../icons/ligthD.svg";
+import darkD from "./../../icons/darkD.svg";
 
 function Projects() {
   const [team, setTeam] = useState(false);
   const [projects, setProjects] = useState(false);
   const [tasks, setTasks] = useState(false);
+  // const [theme, setTheme] = useState("ligth");
+  const [theme, setTheme] = useContext(ThemeContext);
+  console.log(theme);
 
   const handleAnimationEnd = () => {
     return (e) => {
@@ -24,9 +28,7 @@ function Projects() {
       <div className="projects__top-wrapp">
         <div className="projects__top">
           <h1 className="projects__title">Projects️</h1>
-          <button className="projects__top-btn">
-            <img src={plusIcon} alt="" />
-          </button>
+          <button className="projects__top-btn">+</button>
         </div>
 
         <div className="projects__main">
@@ -35,7 +37,13 @@ function Projects() {
               className="projects__main-chapter"
               onClick={() => setTeam(!team)}
             >
-              <div className="projects__main-title">Team</div>
+              <div
+                className={` projects__main-title ${
+                  team ? "active" : "deactive"
+                }`}
+              >
+                Team
+              </div>
             </button>
 
             <div
@@ -51,7 +59,13 @@ function Projects() {
               className="projects__main-chapter"
               onClick={() => setProjects(!projects)}
             >
-              <div className="projects__main-title">Projects</div>
+              <div
+                className={` projects__main-title ${
+                  projects ? "active" : "deactive"
+                }`}
+              >
+                Projects
+              </div>
             </button>
             <div
               className={`projects__acc ${projects ? "active" : "deactive"}`}
@@ -79,7 +93,13 @@ function Projects() {
               className="projects__main-chapter"
               onClick={() => setTasks(!tasks)}
             >
-              <div className="projects__main-title">Tasks</div>
+              <div
+                className={` projects__main-title ${
+                  tasks ? "active" : "deactive"
+                }`}
+              >
+                Tasks
+              </div>
             </button>
             <div
               className={`projects__acc ${tasks ? "active" : "deactive"}`}
@@ -104,17 +124,25 @@ function Projects() {
         </div>
       </div>
       <div className="projects__theme">
-        {/* <div className="projects__theme-light">
-          <span className="projects__theme-light__icon"></span>
-          Light
-        </div>
-        <div className="projects__theme-dark">
-          <span className="projects__theme-light__icon"></span>
-          Dark
-        </div> */}
-        <Space direction="vertical">
-          <Switch defaultChecked />
-        </Space>
+        <input
+          type="checkbox"
+          id="darkmode-toggle"
+          className="darkmode__toggle"
+        />
+        <label
+          className="theme__label"
+          htmlFor="darkmode-toggle"
+          onClick={() => setTheme(theme === "ligth" ? "dark" : "ligth")}
+        >
+          <span className=" ligth__btn">
+            <img src={theme === "dark" ? ligthD : ligth} alt="" /> ligth
+          </span>
+          <span className="dark__btn">
+            {" "}
+            <img src={theme === "dark" ? darkD : dark} alt="" />
+            dark
+          </span>
+        </label>
       </div>
     </section>
   );

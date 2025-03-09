@@ -1,12 +1,21 @@
+import Base from "../components/Base/Base";
 import Projects from "../components/Projects/Projects";
 import Sider from "../components/Sider/Sider";
 
+import { createContext, useState } from "react";
+
+export const ThemeContext = createContext("");
+
 function App() {
+  const [theme, setTheme] = useState("ligth");
   return (
-    <div className="wrapper">
-      <Sider />
-      <Projects />
-    </div>
+    <ThemeContext.Provider value={[theme, setTheme]}>
+      <div className={`wrapper ${theme}`}>
+        <Sider />
+        <Projects />
+        <Base />
+      </div>
+    </ThemeContext.Provider>
   );
 }
 

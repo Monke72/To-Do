@@ -4,6 +4,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: all 0.5s;
+  -webkit-box-shadow: 14px -2px 19px -7px rgba(34, 35, 39, 0.11);
+  -moz-box-shadow: 14px -2px 19px -7px rgba(34, 35, 39, 0.11);
+  box-shadow: 14px -2px 19px -7px rgba(34, 35, 39, 0.11);
   &__top {
     display: flex;
     justify-content: space-between;
@@ -27,7 +31,7 @@
     border-radius: 50%;
     background: rgba(28, 29, 34, 0.08);
     color: var(--color-gray);
-    font-size: 20px;
+    font-size: 19px;
   }
 
   &__main {
@@ -161,32 +165,6 @@
   height: 30px;
 }
 
-// .any {
-//   transform: scale(0);
-//   transition: transform 0.3s;
-// }
-
-// .any--entering {
-//   transform: scale(1);
-// }
-// .any--entered {
-//   transform: scale(1);
-// }
-// .my-node-enter {
-//   opacity: 0;
-// }
-// .my-node-enter-active {
-//   opacity: 1;
-//   transition: opacity 200ms;
-// }
-// .my-node-exit {
-//   opacity: 1;
-// }
-// .my-node-exit-active {
-//   opacity: 0;
-//   transition: opacity 200ms;
-// }
-
 @keyframes slideIn {
   from {
     transform: translateX(-100%);
@@ -228,4 +206,104 @@
 }
 .hidden {
   display: none !important;
+}
+
+.theme__label {
+  position: relative;
+  width: 265px;
+  height: 46px;
+  background-color: rgba(28, 29, 34, 0.04);
+  border-radius: 22px;
+  cursor: pointer;
+  transition: all 0.5s;
+  &:after {
+    content: "";
+    width: 127px;
+    height: 34px;
+    position: absolute;
+    top: 6px;
+    left: 5px;
+    background: #fff;
+    border-radius: 18px;
+    transition: all 0.5s;
+  }
+  span {
+    position: absolute;
+    width: 120px;
+    top: 20px;
+    z-index: 100;
+    top: 10px;
+    display: flex;
+    gap: 5px;
+  }
+  .ligth__btn {
+    left: 40px;
+    fill: #000;
+    transition: 0.3s;
+  }
+  .dark__btn {
+    right: -25px;
+    fill: #fff;
+    transition: 0.3s;
+  }
+}
+.darkmode__toggle {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+input:checked + .theme__label {
+  background: rgba(34, 35, 39, 0.9);
+}
+
+input:checked + .theme__label::after {
+  left: 243px;
+  transform: translateX(-100%);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.theme__label:active::after {
+  width: 140px;
+}
+
+input:checked + .theme__label .ligth__btn {
+  fill: #7e7e7e;
+}
+input:checked + .theme__label .dark__btn {
+  fill: #fff;
+}
+.wrapper.dark {
+  .projects {
+    background-color: #222327;
+  }
+  .projects__top h1,
+  .projects__main-title.active {
+    color: var(--color-light);
+  }
+
+  .projects__main-title.deactive,
+  .projects__acc p,
+  .projects__acc button {
+    color: var(--color-gray-any);
+  }
+  .projects__main-list {
+    border-left: 2px solid var(--color-gray-any);
+  }
+  .projects__main-btn::before {
+    background-color: var(--color-gray-any);
+  }
+  .projects__main-chapter::after,
+  .projects__main-chapter::before {
+    background-color: var(--color-gray-any);
+  }
+  .projects__top-btn {
+    color: var(--color-gray-any);
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+  .theme__label {
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+  input:checked + .theme__label::after {
+    background-color: rgba(255, 255, 255, 0.06);
+  }
 }
