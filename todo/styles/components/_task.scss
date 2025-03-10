@@ -1,0 +1,73 @@
+.task {
+  width: 100%;
+  padding: 20px;
+  border: 2px solid rgba(28, 29, 34, 0.06);
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  &__info {
+    padding-bottom: 22px;
+  }
+
+  &__info-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--color-dark);
+  }
+
+  &__info-text {
+    line-height: 1;
+  }
+
+  &__progress {
+    padding-bottom: 20px;
+  }
+
+  &__progress-count {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    &__text {
+      display: flex;
+      p {
+        font-family: var(--any-font);
+      }
+    }
+    &__counter {
+      font-size: 14px;
+      color: var(--color-dark);
+    }
+  }
+
+  &__progress-line {
+    width: 100%;
+    position: relative;
+    background: rgba(28, 29, 34, 0.08);
+    border-radius: 8px;
+    height: 4px;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0px;
+      background: var(--color-red);
+      width: 75%;
+      height: 4px;
+      border-radius: 8px;
+    }
+  }
+
+  &__date-now {
+    max-width: fit-content;
+    height: 30px;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 17px;
+    background: rgba(136, 141, 167, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
