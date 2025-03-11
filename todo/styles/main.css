@@ -722,6 +722,78 @@ input:checked + .theme__label .dark__btn {
   align-items: center;
   background: rgba(28, 29, 34, 0.08);
 }
+.base__add {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+.base__add-btn {
+  padding: 8px 8px;
+  background-color: rgba(120, 215, 0, 0.5);
+  border-radius: 17px;
+  transition: all 0.2s;
+}
+@media (hover: hover) {
+  .base__add-btn:hover {
+    background-color: rgba(120, 215, 0, 0.9);
+    transform: translateY(-2px);
+  }
+}
+@media (hover: none) {
+  .base__add-btn:active {
+    background-color: rgba(120, 215, 0, 0.9);
+    transform: translateY(-2px);
+  }
+}
+.base__add-new {
+  width: 50%;
+}
+.base__add-title {
+  color: var(--color-dark);
+}
+.base__add-title__input {
+  width: 200px;
+  border: 2px solid rgba(28, 29, 34, 0.06);
+  border-radius: 8px;
+}
+.base textarea {
+  max-height: 133px !important;
+  padding: 5px;
+  max-width: 200px;
+  min-width: 200px;
+  min-height: 36px;
+  height: 36px;
+}
+.base h3 {
+  padding-bottom: 17px;
+}
+.base h4 {
+  padding-bottom: 10px;
+}
+.base__add-line {
+  padding-bottom: 30px;
+}
+.base__add-progress {
+  max-width: 50%;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+
+.base__pattern-add {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  padding: 20px;
+  border: 2px dashed rgba(28, 29, 34, 0.08);
+  border-radius: 12px;
+  background: rgb(255, 255, 255);
+}
+
 .task {
   width: 100%;
   padding: 20px;
@@ -762,21 +834,11 @@ input:checked + .theme__label .dark__btn {
   color: var(--color-dark);
 }
 .task__progress-line {
-  width: 100%;
+  width: 70%;
   position: relative;
-  background: rgba(28, 29, 34, 0.08);
-  border-radius: 8px;
-  height: 4px;
-}
-.task__progress-line::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0px;
   background: var(--color-red);
-  width: 75%;
-  height: 4px;
   border-radius: 8px;
+  height: 4px;
 }
 .task__date-now {
   max-width: -moz-fit-content;
@@ -789,4 +851,29 @@ input:checked + .theme__label .dark__btn {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.task__progress-line__all {
+  position: absolute;
+  left: 0;
+  top: 0px;
+  background: rgba(28, 29, 34, 0.08);
+  width: 100%;
+  height: 4px;
+  border-radius: 8px;
+}
+
+.task__line-wrapper {
+  position: relative;
+  max-width: 100%;
+}
+
+.line__red {
+  background: var(--color-red);
+}
+.line__orange {
+  background: var(--color-orange);
+}
+.line__green {
+  background: var(--color-green);
 }/*# sourceMappingURL=main.css.map */

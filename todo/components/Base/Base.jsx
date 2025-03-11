@@ -7,9 +7,6 @@ import burger from "./../../icons/miniBurger.svg";
 import Task from "../Task/Task";
 
 import { InputNumber } from "antd";
-const onChange = (value) => {
-  console.log("changed", value);
-};
 
 const monthNames = [
   "Jan",
@@ -33,7 +30,59 @@ const day = currentDate.getDate();
 console.log(`${day}/${monthNames[month]}/${year}`);
 
 function Base() {
+  //base swither
   const [view, setView] = useState("board");
+  //add component states
+
+  //new todo
+  const [addHeaderTodo, setAddHeaderTodo] = useState("");
+  const [textTodo, setTextTodo] = useState("");
+
+  //todo in progress
+  const [addHeaderProgress, setAddHeaderProgress] = useState("");
+  const [textProgress, setTextProgress] = useState("");
+
+  //function for Header
+  const handleHeader = (event, state) => {
+    const result = event.target.value.replace(/[^a-z]/gi, "");
+    state(result);
+  };
+
+  //function for textArea
+  const handleText = (event, state) => {
+    const result = event.target.value.replace(/[^a-zA-Z0-9\/]/gi, "");
+    state(result);
+  };
+
+  //counters
+
+  const [countTodo, setCountTodo] = useState(10);
+  const [countTask, setCountTask] = useState(1);
+  const [countTasksAll, setCountTasksAll] = useState(10);
+  const [countError, setCountError] = useState("");
+  const onChange = (value, state) => {
+    state(value);
+  };
+
+  const dateNow = `${day} ${monthNames[month]} ${year}`;
+
+  //todo arrays
+  const todo = [
+    {
+      title: "ds new",
+      text: "marketting",
+      allTasks: 10,
+      doTasks: 9,
+      date: dateNow,
+    },
+    {
+      title: "Design newdsds",
+      text: "lores",
+      allTasks: 14,
+      doTasks: 2,
+      date: dateNow,
+    },
+  ];
 
   return (
     <section className="base">
@@ -84,9 +133,9 @@ function Base() {
               </div>
             </div>
             <div className="base__main-tasks">
-              <Task />
-              <Task />
-              <Task />
+              {todo.map((el, i) => (
+                <Task key={i} {...el} />
+              ))}
             </div>
           </div>
           <div className="base__main-new base__main-progress">
@@ -119,34 +168,110 @@ function Base() {
 
       {view === "add" && (
         <div className="base__add">
-          <div className="base__add-new">
-            <div className="base__add-header"></div>
-            <div className="base__add-text"></div>
-          </div>
-
-          <div className="base__add-progress">
+          <form className="base__add-new base__pattern-add">
+            <h3 className="base__add-title">Add new To-Do</h3>
             <div className="base__add-header">
               <p className="field">
-                <label htmlFor="base__add-header">Add Header Text</label>
-                <input type="text" id="base__add-header" />
+                <label className="base__add-title" htmlFor="todo__header">
+                  Add Header Text
+                </label>
+                <input
+                  value={addHeaderTodo}
+                  onChange={(e) => handleHeader(e, setAddHeaderTodo)}
+                  className="base__add-title__input"
+                  type="text"
+                  id="todo__header"
+                />
               </p>
             </div>
             <div className="base__add-text">
               <p className="field">
-                <label htmlFor="base__add-header">Add to-do text</label>
-                <input type="text" id="base__add-header" />
+                <label className="base__add-title" htmlFor="todo__text">
+                  Add to-do text
+                </label>
+                <textarea
+                  value={textTodo}
+                  onChange={(e) => handleText(e, setTextTodo)}
+                  className="base__add-title__input"
+                  type="text"
+                  id="todo__text"
+                />
               </p>
             </div>
             <div className="base__add-line">
-              <h3>Выберете сколько заданий сделано и количество заданий</h3>
+              <h4>Select the number of tasks from 7 to 15</h4>
               <InputNumber
-                min={1}
-                max={10}
+                min={7}
+                max={15}
                 defaultValue={10}
-                onChange={onChange}
+                onChange={(e) => onChange(e, setCountTodo)}
               />
             </div>
-          </div>
+            <button className="base__add-btn__todo base__add-btn">
+              Add new todo
+            </button>
+          </form>
+
+          <form className="base__add-progress base__pattern-add">
+            <h3 className="base__add-title">Add more Progress</h3>
+            <div className="base__add-header">
+              <p className="field">
+                <label className="base__add-title" htmlFor="progress__header">
+                  Add Header Text
+                </label>
+                <input
+                  value={addHeaderProgress}
+                  onChange={(e) => handleHeader(e, setAddHeaderProgress)}
+                  className="base__add-title__input"
+                  type="text"
+                  id="progress__header"
+                />
+              </p>
+            </div>
+            <div className="base__add-text">
+              <p className="field">
+                <label className="base__add-title" htmlFor="progress__text">
+                  Add to-do text
+                </label>
+                <textarea
+                  value={textProgress}
+                  onChange={(e) => handleText(e, setTextProgress)}
+                  typeof="text"
+                  className="base__add-title__input"
+                  type="text"
+                  id="progress__text"
+                />
+              </p>
+            </div>
+            <div className="base__add-line">
+              <h4>
+                Select how many tasks have been completed , and the number of
+                tasks
+              </h4>
+              <InputNumber
+                min={1}
+                max={countTasksAll}
+                defaultValue={1}
+                status={countError}
+                value={countTask}
+                onChange={(e) => onChange(e, setCountTask)}
+              />
+              <span className="from">out of </span>
+              <InputNumber
+                min={7}
+                max={15}
+                value={countTasksAll}
+                defaultValue={10}
+                onChange={(e) => onChange(e, setCountTasksAll)}
+              />
+            </div>
+            <button
+              type="submit"
+              className="base__add-btn__progress base__add-btn"
+            >
+              Add task in progress
+            </button>
+          </form>
         </div>
       )}
     </section>
