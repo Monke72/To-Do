@@ -4,12 +4,13 @@ import progress from "./../../icons/progress.png";
 
 function Task({ title, text, allTasks, doTasks, date }) {
   const lineProgress = ((doTasks / allTasks) * 100).toFixed();
+  const textHead = title.charAt(0).toUpperCase() + title.slice(1);
 
   return (
     <div className="task">
       <div className="task__info">
         <div className="task__info-top">
-          <h4 className="task__info-top__title">{title}</h4>
+          <h4 className="task__info-top__title">{textHead}</h4>
           <button className="task__info-top__btn">
             <img src={burgerInfo} alt="" />
           </button>

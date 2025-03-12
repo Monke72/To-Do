@@ -172,6 +172,13 @@
       padding: 8px 8px;
       background-color: rgba(120, 215, 0, 0.5);
       border-radius: 17px;
+      &:disabled {
+        @include hover {
+          cursor: default;
+          transform: none;
+          background-color: rgba(120, 215, 0, 0.5);
+        }
+      }
 
       transition: all 0.2s;
       @include hover {

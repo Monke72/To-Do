@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import search from "./../../icons/Search.svg";
 import notification from "../../icons/notifications.svg";
 import date from "./../../icons/date.svg";
@@ -44,13 +44,13 @@ function Base() {
 
   //function for Header
   const handleHeader = (event, state) => {
-    const result = event.target.value.replace(/[^a-z]/gi, "");
+    const result = event.target.value.replace(/[^a-zA-Z ]/, "");
     state(result);
   };
 
   //function for textArea
   const handleText = (event, state) => {
-    const result = event.target.value.replace(/[^a-zA-Z0-9\/]/gi, "");
+    const result = event.target.value.replace(/[^a-zA-Z0-9\/ ]/gi, "");
     state(result);
   };
 
@@ -67,23 +67,6 @@ function Base() {
 
   //date
   const dateNow = `${day} ${monthNames[month]} ${year}`;
-
-  //function add new todo
-  function addNewTodo(e) {
-    e.preventDefault();
-    const newTodo = {
-      title: addHeaderTodo,
-      text: textTodo,
-      allTasks: countTodo,
-      doTasks: 0,
-      date: dateNow,
-    };
-    todo.push(newTodo);
-    console.log(todo);
-    setAddHeaderTodo("");
-    setTextTodo("");
-    setCountTodo(10);
-  }
 
   //todo arrays
   const todo = [
@@ -102,6 +85,57 @@ function Base() {
       date: dateNow,
     },
   ];
+
+  const [todoArray, setTodoArray] = useState(todo);
+  const [error, setError] = useState(true);
+  const [headerError, setHeaderError] = useState(true);
+  const [textError, setTextError] = useState(true);
+
+  console.log(addHeaderTodo.length, textTodo, countTodo);
+
+  //function add new todo
+  function addNewTodo(e) {
+    e.preventDefault();
+
+    const newTodo = {
+      title: addHeaderTodo.replace(/^ +/, ""),
+      text: textTodo,
+      allTasks: countTodo,
+      doTasks: 0,
+      date: dateNow,
+    };
+
+    setTodoArray([...todoArray, newTodo]);
+
+    setAddHeaderTodo("");
+    setTextTodo("");
+    setCountTodo(10);
+  }
+  console.log(headerError, textError);
+
+  useEffect(() => {
+    if (!headerError && !textError) {
+      setError(false);
+    }
+  });
+
+  //function add new todo in progress
+  // function addProgressTodo(e) {
+  //   e.preventDefault();
+  //   const newTodo = {
+  //     title: addHeaderProgress.replace(/^ +/, ""),
+  //     text: textProgress,
+  //     allTasks: countTasksAll,
+  //     doTasks: countTask,
+  //     date: dateNow,
+  //   };
+
+  //   console.log(todo);
+  //   setAddHeaderTodo("");
+  //   setTextTodo("");
+  //   setCountTodo(10);
+  // }
+  // addProgressTodo;
 
   return (
     <section className="base">
@@ -152,7 +186,7 @@ function Base() {
               </div>
             </div>
             <div className="base__main-tasks">
-              {todo.map((el, i) => (
+              {todoArray.map((el, i) => (
                 <Task key={i} {...el} />
               ))}
             </div>
@@ -196,6 +230,11 @@ function Base() {
                 </label>
                 <input
                   value={addHeaderTodo}
+                  onBlur={() =>
+                    addHeaderTodo.length > 0
+                      ? setHeaderError(false)
+                      : setHeaderError(true)
+                  }
                   onChange={(e) => handleHeader(e, setAddHeaderTodo)}
                   className="base__add-title__input"
                   type="text"
@@ -209,6 +248,11 @@ function Base() {
                   Add to-do text
                 </label>
                 <textarea
+                  onBlur={() =>
+                    textTodo.length > 0
+                      ? setTextError(false)
+                      : setTextError(true)
+                  }
                   value={textTodo}
                   onChange={(e) => handleText(e, setTextTodo)}
                   className="base__add-title__input"
@@ -229,6 +273,7 @@ function Base() {
             <button
               className="base__add-btn__todo base__add-btn"
               onClick={(e) => addNewTodo(e)}
+              disabled={error}
             >
               Add new todo
             </button>
