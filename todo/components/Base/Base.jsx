@@ -57,14 +57,33 @@ function Base() {
   //counters
 
   const [countTodo, setCountTodo] = useState(10);
+
   const [countTask, setCountTask] = useState(1);
   const [countTasksAll, setCountTasksAll] = useState(10);
-  const [countError, setCountError] = useState("");
+
   const onChange = (value, state) => {
     state(value);
   };
 
+  //date
   const dateNow = `${day} ${monthNames[month]} ${year}`;
+
+  //function add new todo
+  function addNewTodo(e) {
+    e.preventDefault();
+    const newTodo = {
+      title: addHeaderTodo,
+      text: textTodo,
+      allTasks: countTodo,
+      doTasks: 0,
+      date: dateNow,
+    };
+    todo.push(newTodo);
+    console.log(todo);
+    setAddHeaderTodo("");
+    setTextTodo("");
+    setCountTodo(10);
+  }
 
   //todo arrays
   const todo = [
@@ -207,7 +226,10 @@ function Base() {
                 onChange={(e) => onChange(e, setCountTodo)}
               />
             </div>
-            <button className="base__add-btn__todo base__add-btn">
+            <button
+              className="base__add-btn__todo base__add-btn"
+              onClick={(e) => addNewTodo(e)}
+            >
               Add new todo
             </button>
           </form>
@@ -252,7 +274,6 @@ function Base() {
                 min={1}
                 max={countTasksAll}
                 defaultValue={1}
-                status={countError}
                 value={countTask}
                 onChange={(e) => onChange(e, setCountTask)}
               />
