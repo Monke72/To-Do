@@ -788,7 +788,7 @@ input:checked + .theme__label .dark__btn {
   padding-bottom: 30px;
 }
 .base__add-progress {
-  max-width: 50%;
+  width: 50%;
 }
 
 .field {
@@ -890,4 +890,37 @@ input:checked + .theme__label .dark__btn {
 }
 .line__green {
   background: var(--color-green);
+}
+
+.task {
+  position: relative;
+}
+.task__modal {
+  position: absolute;
+  right: -11px;
+  background: rgba(28, 29, 34, 0.06);
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+  padding: 8px 13px;
+  border-radius: 8px;
+  z-index: 4;
+  top: -13px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(28, 29, 34, 0.16);
+}
+.task__modal-exit {
+  position: relative;
+  width: 25px;
+  color: #fc0101;
+  right: -43px;
+  top: -7px;
+  height: 7px;
+}
+.task__delete {
+  color: var(--color-red);
+}
+.task__edit {
+  color: var(--color-orange);
 }/*# sourceMappingURL=main.css.map */

@@ -5,6 +5,7 @@ import date from "./../../icons/date.svg";
 import profile from "./../../icons/pr.png";
 import burger from "./../../icons/miniBurger.svg";
 import Task from "../Task/Task";
+import { useId } from "react";
 
 import { InputNumber } from "antd";
 
@@ -27,9 +28,10 @@ const year = currentDate.getFullYear();
 const month = currentDate.getMonth(); // Месяц начинается с 0, поэтому прибавляем 1
 const day = currentDate.getDate();
 
-console.log(`${day}/${monthNames[month]}/${year}`);
+// console.log(`${day}/${monthNames[month]}/${year}`);
 
 function Base() {
+  const id = useId();
   //base swither
   const [view, setView] = useState("board");
   //add component states
@@ -57,12 +59,12 @@ function Base() {
   //counters
 
   const [countTodo, setCountTodo] = useState(10);
-
   const [countTask, setCountTask] = useState(1);
   const [countTasksAll, setCountTasksAll] = useState(10);
 
   const onChange = (value, state) => {
     state(value);
+    // console.log(value);
   };
 
   //date
@@ -71,18 +73,31 @@ function Base() {
   //todo arrays
   const todo = [
     {
+      id: "todoOne",
       title: "ds new",
       text: "marketting",
       allTasks: 10,
       doTasks: 9,
       date: dateNow,
+      status: "new",
     },
     {
+      id: "todoToo",
       title: "Design newdsds",
       text: "lores",
       allTasks: 14,
       doTasks: 2,
       date: dateNow,
+      status: "new",
+    },
+    {
+      id: "todoToo",
+      title: "Design newdsds",
+      text: "lores",
+      allTasks: 14,
+      doTasks: 2,
+      date: dateNow,
+      status: "progress",
     },
   ];
 
@@ -91,51 +106,60 @@ function Base() {
   const [headerError, setHeaderError] = useState(true);
   const [textError, setTextError] = useState(true);
 
-  console.log(addHeaderTodo.length, textTodo, countTodo);
-
   //function add new todo
   function addNewTodo(e) {
     e.preventDefault();
 
     const newTodo = {
-      title: addHeaderTodo.replace(/^ +/, ""),
+      id: id,
+      title: addHeaderTodo.trimLeft(),
       text: textTodo,
       allTasks: countTodo,
       doTasks: 0,
       date: dateNow,
+      status: "new",
     };
 
     setTodoArray([...todoArray, newTodo]);
-
     setAddHeaderTodo("");
     setTextTodo("");
     setCountTodo(10);
   }
-  console.log(headerError, textError);
-
   useEffect(() => {
-    if (!headerError && !textError) {
+    if (
+      !headerError &&
+      !textError &&
+      addHeaderTodo.length > 0 &&
+      textTodo.length > 0
+    ) {
       setError(false);
+    } else {
+      setError(true);
     }
-  });
+  }, [headerError, textError, addHeaderTodo, textTodo]);
 
-  //function add new todo in progress
-  // function addProgressTodo(e) {
-  //   e.preventDefault();
-  //   const newTodo = {
-  //     title: addHeaderProgress.replace(/^ +/, ""),
-  //     text: textProgress,
-  //     allTasks: countTasksAll,
-  //     doTasks: countTask,
-  //     date: dateNow,
-  //   };
+  function addProgressTodo(e) {
+    e.preventDefault();
+    const newTodo = {
+      id: id,
+      title: addHeaderProgress.trimLeft(),
+      text: textProgress,
+      allTasks: countTasksAll,
+      doTasks: countTask,
+      date: dateNow,
+      status: "progress",
+    };
+    setTodoArray([...todoArray, newTodo]);
 
-  //   console.log(todo);
-  //   setAddHeaderTodo("");
-  //   setTextTodo("");
-  //   setCountTodo(10);
-  // }
+    // console.log(newTodo);
+    setAddHeaderProgress("");
+    setTextProgress("");
+    setCountTask(1);
+    setCountTasksAll(10);
+  }
   // addProgressTodo;
+
+  console.log(todoArray);
 
   return (
     <section className="base">
@@ -186,9 +210,16 @@ function Base() {
               </div>
             </div>
             <div className="base__main-tasks">
-              {todoArray.map((el, i) => (
-                <Task key={i} {...el} />
-              ))}
+              {todoArray
+                .filter((item) => item.status === "new")
+                .map((el, i) => (
+                  <Task
+                    key={i}
+                    {...el}
+                    todoArray={todoArray}
+                    setTodoArray={setTodoArray}
+                  />
+                ))}
             </div>
           </div>
           <div className="base__main-new base__main-progress">
@@ -201,7 +232,13 @@ function Base() {
                 <p className="base__main-new__text">Add new task</p>
               </div>
             </div>
-            <div className="base__main-tasks">yy</div>
+            <div className="base__main-tasks">
+              {todoArray
+                .filter((item) => item.status === "progress")
+                .map((el, i) => (
+                  <Task key={i} {...el} todo={todo} />
+                ))}
+            </div>
           </div>
 
           <div className="base__main-new base__main-done">
@@ -317,14 +354,14 @@ function Base() {
               </h4>
               <InputNumber
                 min={1}
-                max={countTasksAll}
+                max={countTasksAll - 1}
                 defaultValue={1}
                 value={countTask}
                 onChange={(e) => onChange(e, setCountTask)}
               />
               <span className="from">out of </span>
               <InputNumber
-                min={7}
+                min={countTask + 1}
                 max={15}
                 value={countTasksAll}
                 defaultValue={10}
@@ -334,6 +371,7 @@ function Base() {
             <button
               type="submit"
               className="base__add-btn__progress base__add-btn"
+              onClick={(e) => addProgressTodo(e)}
             >
               Add task in progress
             </button>

@@ -89,3 +89,40 @@
     background: var(--color-green);
   }
 }
+
+.task {
+  position: relative;
+
+  &__modal {
+    position: absolute;
+    right: -11px;
+    background: rgba(28, 29, 34, 0.06);
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+    padding: 8px 13px;
+    border-radius: 8px;
+    z-index: 4;
+    top: -13px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(28, 29, 34, 0.16);
+  }
+
+  &__modal-exit {
+    position: relative;
+    width: 25px;
+    color: #fc0101;
+    right: -43px;
+    top: -7px;
+    height: 7px;
+  }
+
+  &__delete {
+    color: var(--color-red);
+  }
+
+  &__edit {
+    color: var(--color-orange);
+  }
+}

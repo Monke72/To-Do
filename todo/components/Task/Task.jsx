@@ -1,19 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import burgerInfo from "./../../icons/more.svg";
 import progress from "./../../icons/progress.png";
 
-function Task({ title, text, allTasks, doTasks, date }) {
+function Task({
+  title,
+  text,
+  allTasks,
+  doTasks,
+  date,
+  id,
+  todoArray,
+  setTodoArray,
+}) {
+  console.log(todoArray);
+
   const lineProgress = ((doTasks / allTasks) * 100).toFixed();
   const textHead = title.charAt(0).toUpperCase() + title.slice(1);
 
+  const [show, setShow] = useState("open");
+
+  function deleteTask(e) {
+    console.log(e.target.closest(".task").id);
+  }
+
   return (
-    <div className="task">
+    <div className="task" id={id}>
       <div className="task__info">
         <div className="task__info-top">
           <h4 className="task__info-top__title">{textHead}</h4>
-          <button className="task__info-top__btn">
-            <img src={burgerInfo} alt="" />
-          </button>
+
+          {show === "open" && (
+            <button
+              className="task__info-top__btn"
+              onClick={() => setShow("close")}
+            >
+              <img src={burgerInfo} alt="" />
+            </button>
+          )}
+
+          {show === "close" && (
+            <div className="task__modal">
+              <button
+                className="task__modal-exit"
+                onClick={() => setShow("open")}
+              >
+                X
+              </button>
+              <button className="task__delete" onClick={(e) => deleteTask(e)}>
+                Delete Task
+              </button>
+              <button className="task__edit">Edit Task</button>
+            </div>
+          )}
         </div>
         <p className="task__info-text">{text}</p>
       </div>
