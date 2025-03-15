@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import search from "./../../icons/Search.svg";
 import notification from "../../icons/notifications.svg";
 import date from "./../../icons/date.svg";
 import profile from "./../../icons/pr.png";
 import burger from "./../../icons/miniBurger.svg";
 import Task from "../Task/Task";
-import { useId } from "react";
 
 import { InputNumber } from "antd";
 
@@ -31,7 +30,10 @@ const day = currentDate.getDate();
 // console.log(`${day}/${monthNames[month]}/${year}`);
 
 function Base() {
-  const id = useId();
+  const [editEff, setEditEff] = useState(false);
+  const [editEl, setEditEl] = useState("");
+
+  const id = `${Date.now()}-${Math.random().toString().slice(2)}`;
   //base swither
   const [view, setView] = useState("board");
   //add component states
@@ -82,7 +84,7 @@ function Base() {
       status: "new",
     },
     {
-      id: "todoToo",
+      id: "todoTood",
       title: "Design newdsds",
       text: "lores",
       allTasks: 14,
@@ -138,6 +140,23 @@ function Base() {
     }
   }, [headerError, textError, addHeaderTodo, textTodo]);
 
+  const [errorProg, setErrorProg] = useState(true);
+  const [headerErrorProg, setHeaderErrorProg] = useState(true);
+  const [textErrorProg, setTextErrorProg] = useState(true);
+
+  useEffect(() => {
+    if (
+      !headerErrorProg &&
+      !textErrorProg &&
+      addHeaderProgress.length > 0 &&
+      textProgress.length > 0
+    ) {
+      setErrorProg(false);
+    } else {
+      setErrorProg(true);
+    }
+  }, [headerErrorProg, textErrorProg, addHeaderProgress, textProgress]);
+
   function addProgressTodo(e) {
     e.preventDefault();
     const newTodo = {
@@ -157,9 +176,27 @@ function Base() {
     setCountTask(1);
     setCountTasksAll(10);
   }
-  // addProgressTodo;
 
   console.log(todoArray);
+  console.log(editEl);
+
+  useEffect(() => {
+    const editTask = todoArray.find((el) => el.id === editEl);
+    if (!editTask) {
+      return;
+    } else {
+      setAddHeaderProgress(editTask.title);
+      setTextProgress(editTask.text);
+      setCountTask(editTask.doTasks);
+      setCountTasksAll(editTask.allTasks);
+      if (view == "board") {
+        setAddHeaderProgress("");
+        setTextProgress("");
+        setCountTask(0);
+        setCountTasksAll(10);
+      }
+    }
+  }, [editEl, view]);
 
   return (
     <section className="base">
@@ -218,6 +255,9 @@ function Base() {
                     {...el}
                     todoArray={todoArray}
                     setTodoArray={setTodoArray}
+                    setView={setView}
+                    setEditEl={setEditEl}
+                    setEditEff={setEditEff}
                   />
                 ))}
             </div>
@@ -236,7 +276,15 @@ function Base() {
               {todoArray
                 .filter((item) => item.status === "progress")
                 .map((el, i) => (
-                  <Task key={i} {...el} todo={todo} />
+                  <Task
+                    key={i}
+                    {...el}
+                    todoArray={todoArray}
+                    setTodoArray={setTodoArray}
+                    setView={setView}
+                    setEditEl={setEditEl}
+                    setEditEff={setEditEff}
+                  />
                 ))}
             </div>
           </div>
@@ -316,7 +364,11 @@ function Base() {
             </button>
           </form>
 
-          <form className="base__add-progress base__pattern-add">
+          <form
+            className={`base__add-progress base__pattern-add ${
+              editEff ? "animated__edit" : ""
+            }`}
+          >
             <h3 className="base__add-title">Add more Progress</h3>
             <div className="base__add-header">
               <p className="field">
@@ -325,6 +377,11 @@ function Base() {
                 </label>
                 <input
                   value={addHeaderProgress}
+                  onBlur={() =>
+                    addHeaderProgress.length > 0
+                      ? setHeaderErrorProg(false)
+                      : setHeaderErrorProg(true)
+                  }
                   onChange={(e) => handleHeader(e, setAddHeaderProgress)}
                   className="base__add-title__input"
                   type="text"
@@ -339,6 +396,11 @@ function Base() {
                 </label>
                 <textarea
                   value={textProgress}
+                  onBlur={() =>
+                    textProgress.length > 0
+                      ? setTextErrorProg(false)
+                      : setTextErrorProg(true)
+                  }
                   onChange={(e) => handleText(e, setTextProgress)}
                   typeof="text"
                   className="base__add-title__input"
@@ -372,6 +434,7 @@ function Base() {
               type="submit"
               className="base__add-btn__progress base__add-btn"
               onClick={(e) => addProgressTodo(e)}
+              disabled={errorProg}
             >
               Add task in progress
             </button>

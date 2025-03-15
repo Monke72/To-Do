@@ -808,6 +808,25 @@ input:checked + .theme__label .dark__btn {
   background: rgb(255, 255, 255);
 }
 
+.animated__edit {
+  animation-name: leaf-odd-grow;
+  animation-duration: 2s;
+}
+
+@keyframes leaf-odd-grow {
+  0% {
+    border: 2px dashed var(--color-red);
+    transform: scale(0.7);
+  }
+  75% {
+    border: 2px dashed var(--color-orange);
+    transform: scale(1.03);
+  }
+  100% {
+    border: 2px dashed rgba(28, 29, 34, 0.08);
+    transform: scale(1);
+  }
+}
 .task {
   width: 100%;
   padding: 20px;

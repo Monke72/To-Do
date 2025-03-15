@@ -11,6 +11,9 @@ function Task({
   id,
   todoArray,
   setTodoArray,
+  setView,
+  setEditEl,
+  setEditEff,
 }) {
   console.log(todoArray);
 
@@ -20,7 +23,17 @@ function Task({
   const [show, setShow] = useState("open");
 
   function deleteTask(e) {
+    const newTodoArray = todoArray.filter(
+      (el) => el.id !== e.target.closest(".task").id
+    );
+    setTodoArray(newTodoArray);
+  }
+  function editTask(e) {
     console.log(e.target.closest(".task").id);
+
+    setView("add");
+    setEditEff(true);
+    setEditEl(e.target.closest(".task").id);
   }
 
   return (
@@ -49,7 +62,9 @@ function Task({
               <button className="task__delete" onClick={(e) => deleteTask(e)}>
                 Delete Task
               </button>
-              <button className="task__edit">Edit Task</button>
+              <button className="task__edit" onClick={(e) => editTask(e)}>
+                Edit Task
+              </button>
             </div>
           )}
         </div>
