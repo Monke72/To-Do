@@ -11,12 +11,8 @@ function Task({
   id,
   todoArray,
   setTodoArray,
-  setView,
-  setEditEl,
-  setEditEff,
+  editTask,
 }) {
-  console.log(todoArray);
-
   const lineProgress = ((doTasks / allTasks) * 100).toFixed();
   const textHead = title.charAt(0).toUpperCase() + title.slice(1);
 
@@ -27,13 +23,6 @@ function Task({
       (el) => el.id !== e.target.closest(".task").id
     );
     setTodoArray(newTodoArray);
-  }
-  function editTask(e) {
-    console.log(e.target.closest(".task").id);
-
-    setView("add");
-    setEditEff(true);
-    setEditEl(e.target.closest(".task").id);
   }
 
   return (

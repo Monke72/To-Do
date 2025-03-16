@@ -13,7 +13,6 @@ function Projects() {
   const [tasks, setTasks] = useState(false);
   // const [theme, setTheme] = useState("ligth");
   const [theme, setTheme] = useContext(ThemeContext);
-  console.log(theme);
 
   const handleAnimationEnd = () => {
     return (e) => {
