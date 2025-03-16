@@ -36,7 +36,8 @@ function Base() {
   const id = `${Date.now()}-${Math.random().toString().slice(2)}`;
   //base swither
   const [view, setView] = useState("board");
-  //add component states
+
+  const [editFlag, setEditFlag] = useState(false);
 
   //new todo
   const [addHeaderTodo, setAddHeaderTodo] = useState("");
@@ -157,6 +158,11 @@ function Base() {
           some.text = textProgress;
           some.allTasks = countTasksAll;
           some.doTasks = countTask;
+
+          setAddHeaderProgress("");
+          setTextProgress("");
+          setCountTask(1);
+          setCountTasksAll(10);
         }
       });
     } else {
@@ -179,10 +185,6 @@ function Base() {
     }
   }
 
-  console.log(todoArray);
-  console.log(editEl);
-
-  const [editFlag, setEditFlag] = useState(false);
   function editTask(e) {
     setEditFlag(true);
     setView("add");
@@ -213,12 +215,6 @@ function Base() {
     }
   }
 
-  // if (view == "board") {
-  //   setAddHeaderProgress("");
-  //   setTextProgress("");
-  //   setCountTask(1);
-  //   setCountTasksAll(10);
-  // } else
   return (
     <section className="base">
       <div className="base__top">
@@ -417,8 +413,7 @@ function Base() {
               </h4>
               <InputNumber
                 min={1}
-                max={countTasksAll - 1}
-                defaultValue={1}
+                max={editFlag ? countTasksAll : countTasksAll - 1}
                 value={countTask}
                 onChange={(e) => onChange(e, setCountTask)}
               />
@@ -427,7 +422,6 @@ function Base() {
                 min={countTask + 1}
                 max={15}
                 value={countTasksAll}
-                defaultValue={10}
                 onChange={(e) => onChange(e, setCountTasksAll)}
               />
             </div>
