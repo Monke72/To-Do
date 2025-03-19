@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { act, useEffect, useState } from "react";
 import search from "./../../icons/Search.svg";
 import notification from "../../icons/notifications.svg";
 import date from "./../../icons/date.svg";
@@ -7,6 +7,7 @@ import burger from "./../../icons/miniBurger.svg";
 import Task from "../Task/Task";
 
 import { InputNumber } from "antd";
+import { DropArea } from "../DropArea";
 
 const monthNames = [
   "Jan",
@@ -31,7 +32,6 @@ const day = currentDate.getDate();
 
 function Base() {
   const [editEff, setEditEff] = useState(false);
-  const [editEl, setEditEl] = useState("");
 
   const id = `${Date.now()}-${Math.random().toString().slice(2)}`;
   //base swither
@@ -215,6 +215,30 @@ function Base() {
     }
   }
 
+  //dnd
+  const [activeCard, setActiveCard] = useState(null);
+
+  const onDrop = (status, position) => {
+    console.log(activeCard);
+    if (activeCard == null || activeCard === undefined) return;
+
+    const taskMove = todoArray[activeCard];
+    console.log(taskMove);
+
+    const updatedTasks = todoArray.filter(
+      (task, index) => index !== activeCard
+    );
+    console.log(position);
+
+    updatedTasks.slice(position, 0, {
+      ...taskMove,
+      status: status,
+    });
+    console.log(updatedTasks);
+
+    setTodoArray(updatedTasks);
+  };
+
   return (
     <section className="base">
       <div className="base__top">
@@ -263,19 +287,22 @@ function Base() {
                 <p className="base__main-new__text">Add new task</p>
               </div>
             </div>
+            <DropArea onDrop={() => onDrop(1, 0)} />
             <div className="base__main-tasks">
               {todoArray
                 .filter((item) => item.status === "new")
                 .map((el, i) => (
-                  <Task
-                    key={i}
-                    {...el}
-                    todoArray={todoArray}
-                    setTodoArray={setTodoArray}
-                    setView={setView}
-                    setEditEl={setEditEl}
-                    editTask={editTask}
-                  />
+                  <React.Fragment key={i}>
+                    <Task
+                      {...el}
+                      todoArray={todoArray}
+                      setTodoArray={setTodoArray}
+                      setView={setView}
+                      editTask={editTask}
+                      setActiveCard={setActiveCard}
+                    />
+                    <DropArea onDrop={() => onDrop("new", i + 1)} />
+                  </React.Fragment>
                 ))}
             </div>
           </div>
@@ -289,19 +316,23 @@ function Base() {
                 <p className="base__main-new__text">Add new task</p>
               </div>
             </div>
+            <DropArea onDrop={() => onDrop(2, 0)} />
             <div className="base__main-tasks">
               {todoArray
                 .filter((item) => item.status === "progress")
                 .map((el, i) => (
-                  <Task
-                    key={i}
-                    {...el}
-                    todoArray={todoArray}
-                    setTodoArray={setTodoArray}
-                    setView={setView}
-                    setEditEl={setEditEl}
-                    editTask={editTask}
-                  />
+                  <React.Fragment key={i}>
+                    <Task
+                      key={i}
+                      {...el}
+                      todoArray={todoArray}
+                      setTodoArray={setTodoArray}
+                      setView={setView}
+                      editTask={editTask}
+                      setActiveCard={setActiveCard}
+                    />
+                    <DropArea onDrop={() => onDrop("progress", i + 1)} />
+                  </React.Fragment>
                 ))}
             </div>
           </div>
@@ -315,8 +346,26 @@ function Base() {
                 <button className="button__add-done button__add">+</button>
                 <p className="base__main-new__text">Add new task</p>
               </div>
+            </div>{" "}
+            <DropArea onDrop={() => onDrop(3, 0)} />
+            <div className="base__main-tasks">
+              {todoArray
+                .filter((item) => item.status === "done")
+                .map((el, i) => (
+                  <React.Fragment key={i}>
+                    <Task
+                      key={i}
+                      {...el}
+                      todoArray={todoArray}
+                      setTodoArray={setTodoArray}
+                      setView={setView}
+                      editTask={editTask}
+                      setActiveCard={setActiveCard}
+                    />
+                    <DropArea onDrop={() => onDrop("done", i + 1)} />
+                  </React.Fragment>
+                ))}
             </div>
-            <div className="base__main-tasks">yy</div>
           </div>
         </div>
       )}
@@ -370,7 +419,6 @@ function Base() {
               Add new todo
             </button>
           </form>
-
           <form
             className={`base__add-progress base__pattern-add ${
               editEff ? "animated__edit" : ""
@@ -436,6 +484,7 @@ function Base() {
           </form>
         </div>
       )}
+      <h1>{activeCard}</h1>
     </section>
   );
 }

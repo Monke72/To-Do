@@ -126,3 +126,7 @@
     color: var(--color-orange);
   }
 }
+
+.task:active {
+  cursor: grab;
+}

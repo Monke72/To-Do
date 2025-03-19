@@ -96,7 +96,6 @@
     &-tasks {
       display: flex;
       flex-direction: column;
-      gap: 14px;
     }
   }
 
@@ -274,4 +273,18 @@
     border: 2px dashed rgba(28, 29, 34, 0.08);
     transform: scale(1);
   }
+}
+.drop__area {
+  width: 100%;
+  height: 200px;
+  columns: #dcdcdc;
+  border: 1px dashed #dcdcdc;
+  border-radius: 10px;
+  padding: 15px;
+  margin-block: 15px;
+  opacity: 1;
+  transition: all 0.2s;
+}
+.hide__drop {
+  opacity: 0;
 }

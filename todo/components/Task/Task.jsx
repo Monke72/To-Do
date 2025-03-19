@@ -12,6 +12,7 @@ function Task({
   todoArray,
   setTodoArray,
   editTask,
+  setActiveCard,
 }) {
   const lineProgress = ((doTasks / allTasks) * 100).toFixed();
   const textHead = title.charAt(0).toUpperCase() + title.slice(1);
@@ -26,7 +27,15 @@ function Task({
   }
 
   return (
-    <div className="task" id={id}>
+    <div
+      className="task"
+      id={id}
+      draggable="true"
+      onDragStart={() =>
+        setActiveCard(todoArray.findIndex((todo) => todo.id === id))
+      }
+      onDragEnd={() => setActiveCard(null)}
+    >
       <div className="task__info">
         <div className="task__info-top">
           <h4 className="task__info-top__title">{textHead}</h4>
