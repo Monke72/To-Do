@@ -1,4 +1,4 @@
-import React, { act, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import search from "./../../icons/Search.svg";
 import notification from "../../icons/notifications.svg";
 import date from "./../../icons/date.svg";
@@ -163,6 +163,13 @@ function Base() {
           setTextProgress("");
           setCountTask(1);
           setCountTasksAll(10);
+          console.log(editEff);
+          console.log(todoArray);
+
+          setView("board");
+
+          setEditEff(false);
+          setEditFlag(false);
         }
       });
     } else {
@@ -212,6 +219,7 @@ function Base() {
       setCountTasksAll(10);
       setEditFlag(false);
       setEditEff(false);
+      console.log(view);
     }
   }
 
@@ -223,19 +231,19 @@ function Base() {
     if (activeCard == null || activeCard === undefined) return;
 
     const taskMove = todoArray[activeCard];
-    console.log(taskMove);
+    console.log(taskMove.status);
 
     const updatedTasks = todoArray.filter(
       (task, index) => index !== activeCard
     );
+
     console.log(position);
 
-    updatedTasks.slice(position, 0, {
+    updatedTasks.splice(position, 0, {
       ...taskMove,
       status: status,
     });
     console.log(updatedTasks);
-
     setTodoArray(updatedTasks);
   };
 
@@ -280,14 +288,17 @@ function Base() {
           <div className="base__main-new base__main-todo">
             <div className="base__main-new__top">
               <p>
-                To do <span>(0)</span>
+                To do{" "}
+                <span>
+                  ({todoArray.filter((item) => item.status === "new").length})
+                </span>
               </p>
               <div className="add__task">
                 <button className="button__add-todo button__add">+</button>
                 <p className="base__main-new__text">Add new task</p>
               </div>
             </div>
-            <DropArea onDrop={() => onDrop(1, 0)} />
+            <DropArea onDrop={() => onDrop("new", 0)} />
             <div className="base__main-tasks">
               {todoArray
                 .filter((item) => item.status === "new")
@@ -300,6 +311,8 @@ function Base() {
                       setView={setView}
                       editTask={editTask}
                       setActiveCard={setActiveCard}
+                      activeCard={activeCard}
+                      status={"new"}
                     />
                     <DropArea onDrop={() => onDrop("new", i + 1)} />
                   </React.Fragment>
@@ -309,14 +322,22 @@ function Base() {
           <div className="base__main-new base__main-progress">
             <div className="base__main-new__top">
               <p>
-                In progress <span>(0)</span>
+                In progress{" "}
+                <span>
+                  (
+                  {
+                    todoArray.filter((item) => item.status === "progress")
+                      .length
+                  }
+                  )
+                </span>
               </p>
               <div className="add__task">
                 <button className="button__add-progress button__add">+</button>
                 <p className="base__main-new__text">Add new task</p>
               </div>
             </div>
-            <DropArea onDrop={() => onDrop(2, 0)} />
+            <DropArea onDrop={() => onDrop("progress", 0)} />
             <div className="base__main-tasks">
               {todoArray
                 .filter((item) => item.status === "progress")
@@ -330,6 +351,8 @@ function Base() {
                       setView={setView}
                       editTask={editTask}
                       setActiveCard={setActiveCard}
+                      activeCard={activeCard}
+                      status={"progress"}
                     />
                     <DropArea onDrop={() => onDrop("progress", i + 1)} />
                   </React.Fragment>
@@ -340,14 +363,13 @@ function Base() {
           <div className="base__main-new base__main-done">
             <div className="base__main-new__top">
               <p>
-                Done <span>(0)</span>
+                Done
+                <span>
+                  ({todoArray.filter((item) => item.status === "done").length})
+                </span>
               </p>
-              <div className="add__task">
-                <button className="button__add-done button__add">+</button>
-                <p className="base__main-new__text">Add new task</p>
-              </div>
-            </div>{" "}
-            <DropArea onDrop={() => onDrop(3, 0)} />
+            </div>
+            <DropArea onDrop={() => onDrop("done", 0)} />
             <div className="base__main-tasks">
               {todoArray
                 .filter((item) => item.status === "done")
@@ -361,6 +383,8 @@ function Base() {
                       setView={setView}
                       editTask={editTask}
                       setActiveCard={setActiveCard}
+                      activeCard={activeCard}
+                      status={"done"}
                     />
                     <DropArea onDrop={() => onDrop("done", i + 1)} />
                   </React.Fragment>

@@ -5,7 +5,6 @@ export const DropArea = ({ onDrop }) => {
 
   return (
     <div
-      onDragOver={(e) => e.preventDefault()}
       onDragEnter={() => setShowDrop(true)}
       onDragLeave={() => setShowDrop(false)}
       className={showDrop ? "drop__area" : "hide__drop"}
@@ -13,8 +12,9 @@ export const DropArea = ({ onDrop }) => {
         onDrop();
         setShowDrop(false);
       }}
+      onDragOver={(e) => e.preventDefault()}
     >
-      click here
+      <span className="opacity__zero">s</span>
     </div>
   );
 };

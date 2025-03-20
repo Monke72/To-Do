@@ -249,6 +249,7 @@ p {
 
 .wrapper {
   display: flex;
+  height: 100vh;
 }
 
 :root {
@@ -268,39 +269,6 @@ p {
   --info-size: 14px;
 }
 
-.sider {
-  background-color: var(--color-dark);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  height: 100vh;
-  padding: 70px 22px 34px 22px;
-}
-.sider__image {
-  max-width: 24px;
-}
-.sider__top {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 35px;
-}
-.sider__list {
-  display: flex;
-  gap: 5px;
-  flex-direction: column;
-}
-.sider__link {
-  border: 1px solid aqua;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-}
 .projects {
   width: 325px;
   padding: 30px;
@@ -840,6 +808,10 @@ input:checked + .theme__label .dark__btn {
 }
 
 .hide__drop {
+  opacity: 0;
+}
+
+.opacity__zero {
   opacity: 0;
 }
 

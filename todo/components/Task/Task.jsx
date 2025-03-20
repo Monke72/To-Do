@@ -13,8 +13,10 @@ function Task({
   setTodoArray,
   editTask,
   setActiveCard,
+  status,
 }) {
-  const lineProgress = ((doTasks / allTasks) * 100).toFixed();
+  const lineProgress =
+    status == "done" ? 100 : ((doTasks / allTasks) * 100).toFixed();
   const textHead = title.charAt(0).toUpperCase() + title.slice(1);
 
   const [show, setShow] = useState("open");
@@ -26,14 +28,20 @@ function Task({
     setTodoArray(newTodoArray);
   }
 
+  function dragStartHandler() {
+    setActiveCard(todoArray.findIndex((todo) => todo.id === id));
+    const taskMoveDone =
+      todoArray[todoArray.findIndex((todo) => todo.id === id)].status;
+    console.log(taskMoveDone);
+  }
+  console.log(lineProgress);
+
   return (
     <div
       className="task"
       id={id}
-      draggable="true"
-      onDragStart={() =>
-        setActiveCard(todoArray.findIndex((todo) => todo.id === id))
-      }
+      draggable={status === "done" ? false : true}
+      onDragStart={dragStartHandler}
       onDragEnd={() => setActiveCard(null)}
     >
       <div className="task__info">
@@ -75,15 +83,17 @@ function Task({
             <p>Progress</p>
           </div>
           <div className="task__progress-count__counter">
-            <span className="task__progress__done">{doTasks}</span>/
-            <span className="task__progress__progredd">{allTasks}</span>
+            <span className="task__progress__done">
+              {status == "done" ? allTasks : doTasks}
+            </span>
+            /<span className="task__progress__progredd">{allTasks}</span>
           </div>
         </div>
         <div className="task__line-wrapper">
           <div
             className={`task__progress-line ${
               lineProgress > 30 ? "line__orange" : "line__red"
-            } ${lineProgress === 100 && "line__green"} `}
+            } ${lineProgress == 100 && "line__green"} `}
             style={{ width: `${lineProgress}%` }}
           ></div>
           <span className="task__progress-line__all"></span>
