@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import burgerInfo from "./../../icons/more.svg";
 import progress from "./../../icons/progress.png";
+import moreDark from "./../../icons/more-dark.svg";
+import { ThemeContext } from "./../../src/App";
+import { useContext } from "react";
 
 function Task({
   title,
@@ -20,6 +23,7 @@ function Task({
   const textHead = title.charAt(0).toUpperCase() + title.slice(1);
 
   const [show, setShow] = useState("open");
+  const [theme, setTheme] = useContext(ThemeContext);
 
   function deleteTask(e) {
     const newTodoArray = todoArray.filter(
@@ -53,7 +57,7 @@ function Task({
               className="task__info-top__btn"
               onClick={() => setShow("close")}
             >
-              <img src={burgerInfo} alt="" />
+              <img src={theme === "ligth" ? burgerInfo : moreDark} alt="" />
             </button>
           )}
 

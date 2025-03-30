@@ -299,6 +299,10 @@ p {
   color: var(--color-gray);
   font-size: 19px;
 }
+.projects__top-btn:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
 .projects__main {
   display: flex;
   flex-direction: column;
@@ -485,6 +489,7 @@ p {
   left: 40px;
   fill: #000;
   transition: 0.3s;
+  color: #000;
 }
 .theme__label .dark__btn {
   right: -25px;
@@ -552,8 +557,33 @@ input:checked + .theme__label .dark__btn {
 .wrapper.dark input:checked + .theme__label::after {
   background-color: rgba(255, 255, 255, 0.06);
 }
+.wrapper.dark .ligth__btn {
+  color: gray;
+}
+.wrapper.dark .dark__btn {
+  color: var(--color-light);
+}
+
+.no__el {
+  opacity: 0.7;
+}
+@media (hover: hover) {
+  .no__el:hover {
+    background-color: unset;
+    cursor: default;
+    color: unset;
+  }
+}
+@media (hover: none) {
+  .no__el:active {
+    background-color: unset;
+    cursor: default;
+    color: unset;
+  }
+}
 
 .base {
+  transition: all 0.8s;
   width: 100%;
   padding: 32px;
   position: relative;
@@ -581,7 +611,7 @@ input:checked + .theme__label .dark__btn {
 }
 .base__view {
   display: flex;
-  border-bottom: 1px solid rgba(28, 29, 34, 0.08);
+  border-bottom: 2px solid rgba(28, 29, 34, 0.08);
   margin-bottom: 20px;
 }
 .base__view-board, .base__view-add {
@@ -601,7 +631,7 @@ input:checked + .theme__label .dark__btn {
     width: 100%;
     transition: all 2s;
     background: var(--color-dark);
-    height: 1px;
+    height: 2px;
   }
 }
 @media (hover: none) {
@@ -612,7 +642,7 @@ input:checked + .theme__label .dark__btn {
     width: 100%;
     transition: all 2s;
     background: var(--color-dark);
-    height: 1px;
+    height: 2px;
   }
 }
 .base__view-board.base__selected::after, .base__view-add.base__selected::after {
@@ -622,7 +652,7 @@ input:checked + .theme__label .dark__btn {
   width: 100%;
   transition: all 2s;
   background: var(--color-dark);
-  height: 1px;
+  height: 2px;
 }
 .base__view-board img, .base__view-add img {
   width: 18px;
@@ -678,7 +708,7 @@ input:checked + .theme__label .dark__btn {
 }
 
 .button__add {
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 700;
   color: var(--color-gray);
   width: 20px;
@@ -794,6 +824,10 @@ input:checked + .theme__label .dark__btn {
     transform: scale(1);
   }
 }
+.dis {
+  opacity: 0.7;
+}
+
 .drop__area {
   width: 100%;
   height: 200px;
@@ -813,6 +847,52 @@ input:checked + .theme__label .dark__btn {
 
 .opacity__zero {
   opacity: 0;
+}
+
+.wrapper.dark .base__header-welcome h3 {
+  color: var(--color-light);
+}
+.wrapper.dark .base {
+  background-color: rgb(41, 43, 49);
+}
+.wrapper.dark .base__view-board {
+  color: var(--color-light);
+}
+.wrapper.dark .base__view-board.base__selected::after,
+.wrapper.dark .base__view-add.base__selected::after {
+  background: var(--color-light);
+}
+@media (hover: hover) {
+  .wrapper.dark .base__view-board:hover::after,
+  .wrapper.dark .base__view-add:hover::after {
+    background: var(--color-light);
+  }
+}
+@media (hover: none) {
+  .wrapper.dark .base__view-board:active::after,
+  .wrapper.dark .base__view-add:active::after {
+    background: var(--color-light);
+  }
+}
+.wrapper.dark .base__main-new {
+  background-color: rgb(36, 38, 44);
+}
+.wrapper.dark .base__main-new__top p,
+.wrapper.dark .task__info-text,
+.wrapper.dark .task__progress-count__text p,
+.wrapper.dark .task__date-now {
+  color: var(--color-gray-any);
+}
+.wrapper.dark .base h4,
+.wrapper.dark .task__progress-count__counter {
+  color: var(--color-light);
+}
+.wrapper.dark .task,
+.wrapper.dark .button__add {
+  background-color: rgb(41, 43, 49);
+}
+.wrapper.dark .button__add {
+  color: var(--color-gray-any);
 }
 
 .task {

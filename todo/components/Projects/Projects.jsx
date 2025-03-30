@@ -7,12 +7,16 @@ import ligth from "./../../icons/light.svg";
 import ligthD from "./../../icons/ligthD.svg";
 import darkD from "./../../icons/darkD.svg";
 
-function Projects() {
+function Projects({ todoArray, setView, view }) {
   const [team, setTeam] = useState(false);
   const [projects, setProjects] = useState(false);
   const [tasks, setTasks] = useState(false);
   // const [theme, setTheme] = useState("ligth");
   const [theme, setTheme] = useContext(ThemeContext);
+
+  const handleButton = () => {
+    setView("add");
+  };
 
   const handleAnimationEnd = () => {
     return (e) => {
@@ -27,7 +31,13 @@ function Projects() {
       <div className="projects__top-wrapp">
         <div className="projects__top">
           <h1 className="projects__title">Projects️</h1>
-          <button className="projects__top-btn">+</button>
+          <button
+            className="projects__top-btn"
+            onClick={handleButton}
+            disabled={view === "add"}
+          >
+            +
+          </button>
         </div>
 
         <div className="projects__main">
@@ -49,7 +59,7 @@ function Projects() {
               className={`projects__acc ${team ? "active" : "deactive"}`}
               onAnimationEnd={handleAnimationEnd()}
             >
-              <p>Your not have a teame</p>
+              <p>You don't have a team</p>
             </div>
           </div>
 
@@ -72,16 +82,24 @@ function Projects() {
             >
               <ul className="projects__main-list">
                 <li className="projects__main-item">
-                  <button className="projects__main-btn">All projects</button>
+                  <button className="projects__main-btn">
+                    All projects ({todoArray.length})
+                  </button>
                 </li>
                 <li className="projects__main-item">
-                  <button className="projects__main-btn">Design system</button>
+                  <button className="projects__main-btn no__el">
+                    Design system
+                  </button>
                 </li>
                 <li className="projects__main-item">
-                  <button className="projects__main-btn">User flow</button>
+                  <button className="projects__main-btn no__el">
+                    User flow
+                  </button>
                 </li>
                 <li className="projects__main-item">
-                  <button className="projects__main-btn">Ux research</button>
+                  <button className="projects__main-btn no__el">
+                    Ux research
+                  </button>
                 </li>
               </ul>
             </div>
@@ -106,16 +124,31 @@ function Projects() {
             >
               <ul className="projects__main-list">
                 <li className="projects__main-item">
-                  <button className="projects__main-btn">All tasks</button>
+                  <button className="projects__main-btn">
+                    All tasks ({todoArray.length})
+                  </button>
                 </li>
                 <li className="projects__main-item">
-                  <button className="projects__main-btn">To do</button>
+                  <button className="projects__main-btn">
+                    To do (
+                    {todoArray.filter((item) => item.status === "new").length})
+                  </button>
                 </li>
                 <li className="projects__main-item">
-                  <button className="projects__main-btn">In progress</button>
+                  <button className="projects__main-btn">
+                    In progress (
+                    {
+                      todoArray.filter((item) => item.status === "progress")
+                        .length
+                    }
+                    )
+                  </button>
                 </li>
                 <li className="projects__main-item">
-                  <button className="projects__main-btn">Done</button>
+                  <button className="projects__main-btn">
+                    Done (
+                    {todoArray.filter((item) => item.status === "done").length})
+                  </button>
                 </li>
               </ul>
             </div>

@@ -5,6 +5,10 @@ import date from "./../../icons/date.svg";
 import profile from "./../../icons/pr.png";
 import burger from "./../../icons/miniBurger.svg";
 import Task from "../Task/Task";
+import lightBurger from "./../../icons/light-burger.svg";
+
+import { ThemeContext } from "./../../src/App";
+import { useContext } from "react";
 
 import { InputNumber } from "antd";
 import { DropArea } from "../DropArea";
@@ -28,14 +32,45 @@ const year = currentDate.getFullYear();
 const month = currentDate.getMonth(); // Месяц начинается с 0, поэтому прибавляем 1
 const day = currentDate.getDate();
 
-// console.log(`${day}/${monthNames[month]}/${year}`);
+const dateNow = `${day} ${monthNames[month]} ${year}`;
 
-function Base() {
+export const todo = [
+  {
+    id: "todoOne",
+    title: "ds new",
+    text: "marketting",
+    allTasks: 10,
+    doTasks: 9,
+    date: dateNow,
+    status: "new",
+  },
+  {
+    id: "todoTood",
+    title: "Design newdsds",
+    text: "lores",
+    allTasks: 14,
+    doTasks: 2,
+    date: dateNow,
+    status: "new",
+  },
+  {
+    id: "todoToo",
+    title: "Design newdsds",
+    text: "lores",
+    allTasks: 14,
+    doTasks: 2,
+    date: dateNow,
+    status: "progress",
+  },
+];
+
+function Base({ todoArray, setTodoArray, setView, view }) {
+  const [theme, setTheme] = useContext(ThemeContext);
+
   const [editEff, setEditEff] = useState(false);
 
   const id = `${Date.now()}-${Math.random().toString().slice(2)}`;
   //base swither
-  const [view, setView] = useState("board");
 
   const [editFlag, setEditFlag] = useState(false);
 
@@ -70,41 +105,6 @@ function Base() {
     // console.log(value);
   };
 
-  //date
-  const dateNow = `${day} ${monthNames[month]} ${year}`;
-
-  //todo arrays
-  const todo = [
-    {
-      id: "todoOne",
-      title: "ds new",
-      text: "marketting",
-      allTasks: 10,
-      doTasks: 9,
-      date: dateNow,
-      status: "new",
-    },
-    {
-      id: "todoTood",
-      title: "Design newdsds",
-      text: "lores",
-      allTasks: 14,
-      doTasks: 2,
-      date: dateNow,
-      status: "new",
-    },
-    {
-      id: "todoToo",
-      title: "Design newdsds",
-      text: "lores",
-      allTasks: 14,
-      doTasks: 2,
-      date: dateNow,
-      status: "progress",
-    },
-  ];
-
-  const [todoArray, setTodoArray] = useState(todo);
   const [error, setError] = useState(true);
 
   //function add new todo
@@ -268,15 +268,17 @@ function Base() {
           <button
             onClick={() => switchBoard()}
             className={`base__view-board ${
-              view === "board" && "base__selected"
+              view === "board" ? "base__selected" : "dis"
             }`}
           >
-            <img src={burger} alt="" />
+            <img src={theme === "dark" ? lightBurger : burger} alt="" />
             Board View
           </button>
           <button
             onClick={() => setView("add")}
-            className={`base__view-board ${view === "add" && "base__selected"}`}
+            className={`base__view-board ${
+              view === "add" ? "base__selected" : "dis"
+            }`}
           >
             <span>+</span>Add view
           </button>
