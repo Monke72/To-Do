@@ -278,6 +278,22 @@ p {
   transition: all 0.5s;
   box-shadow: 14px -2px 19px -7px rgba(34, 35, 39, 0.11);
 }
+@media (max-width: 1239px) {
+  .projects {
+    width: 255px;
+    padding: 13px 23px 23px 23px;
+  }
+}
+@media (max-width: 1023px) {
+  .projects {
+    display: none;
+    transition: all 0.5s;
+    position: absolute;
+    height: 100vh;
+    z-index: 111;
+    background: #fff;
+  }
+}
 .projects__top {
   display: flex;
   justify-content: space-between;
@@ -289,6 +305,8 @@ p {
   color: var(--color-dark);
 }
 .projects__top-btn {
+  position: relative;
+  top: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -476,6 +494,12 @@ p {
   border-radius: 18px;
   transition: all 0.5s;
 }
+@media (max-width: 1239px) {
+  .theme__label:after {
+    width: 91px;
+    left: 9px;
+  }
+}
 .theme__label span {
   position: absolute;
   width: 120px;
@@ -491,10 +515,20 @@ p {
   transition: 0.3s;
   color: #000;
 }
+@media (max-width: 1239px) {
+  .theme__label .ligth__btn {
+    left: 19px;
+  }
+}
 .theme__label .dark__btn {
   right: -25px;
   fill: #fff;
   transition: 0.3s;
+}
+@media (max-width: 1239px) {
+  .theme__label .dark__btn {
+    right: -39px;
+  }
 }
 
 .darkmode__toggle {
@@ -512,9 +546,14 @@ input:checked + .theme__label::after {
   transform: translateX(-100%);
   background: rgba(255, 255, 255, 0.06);
 }
+@media (max-width: 1239px) {
+  input:checked + .theme__label::after {
+    left: 186px;
+  }
+}
 
 .theme__label:active::after {
-  width: 140px;
+  width: 100px;
 }
 
 input:checked + .theme__label .ligth__btn {
@@ -589,6 +628,11 @@ input:checked + .theme__label .dark__btn {
   position: relative;
   display: flex;
   flex-direction: column;
+}
+@media (max-width: 1239px) {
+  .base {
+    padding: 25px 17px 22px 17px;
+  }
 }
 .base__top {
   display: flex;
@@ -676,9 +720,20 @@ input:checked + .theme__label .dark__btn {
   height: 100%;
   gap: 22px;
 }
+@media (max-width: 1239px) {
+  .base__main {
+    gap: 15px;
+  }
+}
 .base__main-tasks {
+  max-height: 70vh;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  border-radius: 12px;
+}
+.base__main-tasks::-webkit-scrollbar {
+  display: none;
 }
 .base__main-new {
   padding: 22px 16px 16px 16px;
@@ -686,17 +741,33 @@ input:checked + .theme__label .dark__btn {
   border-radius: 12px;
   width: 100%;
 }
+@media (max-width: 1239px) {
+  .base__main-new {
+    padding: 15px 12px 12px 12px;
+  }
+}
 .base__main-new__top {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-bottom: 16px;
 }
+@media (max-width: 1239px) {
+  .base__main-new__top {
+    display: unset;
+  }
+}
 .base__main-new__top p {
   font-family: var(--any-font);
   display: flex;
   align-items: center;
   gap: 3px;
+}
+@media (max-width: 1239px) {
+  .base__main-new__top p {
+    order: -1;
+    padding-top: 3px;
+  }
 }
 .base__main-new__text {
   color: var(--color-dark);
@@ -723,6 +794,11 @@ input:checked + .theme__label .dark__btn {
   display: flex;
   justify-content: space-between;
   gap: 50px;
+}
+@media (max-width: 1239px) {
+  .base__add {
+    gap: 25px;
+  }
 }
 .base__add-btn {
   padding: 8px 8px;
@@ -769,6 +845,7 @@ input:checked + .theme__label .dark__btn {
 }
 .base textarea {
   max-height: 133px !important;
+  outline: none;
   padding: 5px;
   max-width: 200px;
   min-width: 200px;
@@ -849,6 +926,31 @@ input:checked + .theme__label .dark__btn {
   opacity: 0;
 }
 
+.task__progress-count__text {
+  gap: 3px;
+}
+
+.wrapper.dark .base__pattern-add {
+  background-color: rgb(36, 38, 44);
+}
+.wrapper.dark .base h3 {
+  color: var(--color-light);
+}
+.wrapper.dark .base input,
+.wrapper.dark .base textarea {
+  background-color: rgb(49, 51, 61);
+  color: rgba(255, 255, 255, 0.7);
+}
+.wrapper.dark .base input:focus,
+.wrapper.dark .base textarea:focus {
+  border: 1px solid var(--color-gray-any);
+}
+.wrapper.dark .from {
+  color: var(--color-gray-any);
+}
+.wrapper.dark .base__add-title {
+  color: var(--color-gray-any);
+}
 .wrapper.dark .base__header-welcome h3 {
   color: var(--color-light);
 }
@@ -894,6 +996,46 @@ input:checked + .theme__label .dark__btn {
 .wrapper.dark .button__add {
   color: var(--color-gray-any);
 }
+.wrapper.dark .base__view {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+.wrapper.dark .base__add-btn {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(120, 215, 0, 0.7);
+}
+@media (hover: hover) {
+  .wrapper.dark .base__add-btn:disabled:hover {
+    background-color: rgba(120, 215, 0, 0.7);
+  }
+}
+@media (hover: none) {
+  .wrapper.dark .base__add-btn:disabled:active {
+    background-color: rgba(120, 215, 0, 0.7);
+  }
+}
+@media (hover: hover) {
+  .wrapper.dark .base__add-btn:hover {
+    background-color: rgba(120, 215, 0, 0.9);
+    color: rgb(255, 255, 255);
+  }
+}
+@media (hover: none) {
+  .wrapper.dark .base__add-btn:active {
+    background-color: rgba(120, 215, 0, 0.9);
+    color: rgb(255, 255, 255);
+  }
+}
+.wrapper.dark .base__header-icons__date {
+  color: var(--color-gray-any);
+}
+.wrapper.dark .base__view-board span {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.from {
+  padding-inline: 5px;
+}
 
 .task {
   width: 100%;
@@ -902,6 +1044,11 @@ input:checked + .theme__label .dark__btn {
   display: flex;
   flex-direction: column;
   border-radius: 12px;
+}
+@media (max-width: 1239px) {
+  .task {
+    padding: 12px;
+  }
 }
 .task__info {
   padding-bottom: 22px;
@@ -984,18 +1131,23 @@ input:checked + .theme__label .dark__btn {
 }
 .task__modal {
   position: absolute;
-  right: -11px;
-  background: rgba(28, 29, 34, 0.06);
+  right: 0px;
+  background-color: var(--color-gray);
   display: flex;
   gap: 4px;
   flex-direction: column;
   padding: 8px 13px;
   border-radius: 8px;
   z-index: 4;
-  top: -13px;
+  top: 0px;
   align-items: center;
   justify-content: center;
   border: 1px solid rgba(28, 29, 34, 0.16);
+}
+@media (max-width: 1239px) {
+  .task__modal {
+    padding: 4px 7px;
+  }
 }
 .task__modal-exit {
   position: relative;
@@ -1004,6 +1156,12 @@ input:checked + .theme__label .dark__btn {
   right: -43px;
   top: -7px;
   height: 7px;
+}
+@media (max-width: 1239px) {
+  .task__modal-exit {
+    right: -39px;
+    top: -4px;
+  }
 }
 .task__delete {
   color: var(--color-red);
@@ -1014,4 +1172,8 @@ input:checked + .theme__label .dark__btn {
 
 .task:active {
   cursor: grab;
+}
+
+.wrapper.dark .task__progress-line__all {
+  background: rgba(28, 29, 34, 0.2);
 }/*# sourceMappingURL=main.css.map */

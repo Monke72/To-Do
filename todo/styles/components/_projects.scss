@@ -8,6 +8,20 @@
   -webkit-box-shadow: 14px -2px 19px -7px rgba(34, 35, 39, 0.11);
   -moz-box-shadow: 14px -2px 19px -7px rgba(34, 35, 39, 0.11);
   box-shadow: 14px -2px 19px -7px rgba(34, 35, 39, 0.11);
+
+  @include desktop {
+    width: 255px;
+    padding: 13px 23px 23px 23px;
+  }
+  @include tablet {
+    display: none;
+    transition: all 0.5s;
+    position: absolute;
+    height: 100vh;
+    z-index: 111;
+    background: #fff;
+  }
+
   &__top {
     display: flex;
     justify-content: space-between;
@@ -23,6 +37,8 @@
   }
 
   &__top-btn {
+    position: relative;
+    top: 3px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -230,6 +246,10 @@
     background: #fff;
     border-radius: 18px;
     transition: all 0.5s;
+    @include desktop {
+      width: 91px;
+      left: 9px;
+    }
   }
   span {
     position: absolute;
@@ -245,11 +265,17 @@
     fill: #000;
     transition: 0.3s;
     color: #000;
+    @include desktop {
+      left: 19px;
+    }
   }
   .dark__btn {
     right: -25px;
     fill: #fff;
     transition: 0.3s;
+    @include desktop {
+      right: -39px;
+    }
   }
 }
 .darkmode__toggle {
@@ -265,10 +291,13 @@ input:checked + .theme__label::after {
   left: 243px;
   transform: translateX(-100%);
   background: rgba(255, 255, 255, 0.06);
+  @include desktop {
+    left: 186px;
+  }
 }
 
 .theme__label:active::after {
-  width: 140px;
+  width: 100px;
 }
 
 input:checked + .theme__label .ligth__btn {

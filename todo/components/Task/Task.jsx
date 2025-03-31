@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import burgerInfo from "./../../icons/more.svg";
 import progress from "./../../icons/progress.png";
 import moreDark from "./../../icons/more-dark.svg";
+import progressDark from "./../../icons/progress-dark.svg";
 import { ThemeContext } from "./../../src/App";
 import { useContext } from "react";
 
@@ -72,9 +73,11 @@ function Task({
               <button className="task__delete" onClick={(e) => deleteTask(e)}>
                 Delete Task
               </button>
-              <button className="task__edit" onClick={(e) => editTask(e)}>
-                Edit Task
-              </button>
+              {status !== "done" && (
+                <button className="task__edit" onClick={(e) => editTask(e)}>
+                  Edit Task
+                </button>
+              )}
             </div>
           )}
         </div>
@@ -83,7 +86,7 @@ function Task({
       <div className="task__progress">
         <div className="task__progress-count">
           <div className="task__progress-count__text">
-            <img src={progress} alt="" />
+            <img src={theme === "ligth" ? progress : progressDark} alt="" />
             <p>Progress</p>
           </div>
           <div className="task__progress-count__counter">

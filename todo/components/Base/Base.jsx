@@ -6,12 +6,17 @@ import profile from "./../../icons/pr.png";
 import burger from "./../../icons/miniBurger.svg";
 import Task from "../Task/Task";
 import lightBurger from "./../../icons/light-burger.svg";
+import dateDark from "./../../icons/date-dark.svg";
+import { MenuOutlined } from "@ant-design/icons";
 
 import { ThemeContext } from "./../../src/App";
 import { useContext } from "react";
 
 import { InputNumber } from "antd";
 import { DropArea } from "../DropArea";
+
+const width = window.innerWidth;
+console.log(width);
 
 const monthNames = [
   "Jan",
@@ -66,6 +71,7 @@ export const todo = [
 
 function Base({ todoArray, setTodoArray, setView, view }) {
   const [theme, setTheme] = useContext(ThemeContext);
+  console.log(theme);
 
   const [editEff, setEditEff] = useState(false);
 
@@ -153,11 +159,16 @@ function Base({ todoArray, setTodoArray, setView, view }) {
         if (el.id === editTaskM.id) {
           const task = el.id;
           const some = todoArray.find((el) => el.id === task);
+          console.log(some);
 
           some.title = addHeaderProgress;
           some.text = textProgress;
           some.allTasks = countTasksAll;
           some.doTasks = countTask;
+          if (countTasksAll === countTask) {
+            some.status = "done";
+          }
+          console.log(some.status);
 
           setAddHeaderProgress("");
           setTextProgress("");
@@ -167,7 +178,6 @@ function Base({ todoArray, setTodoArray, setView, view }) {
           console.log(todoArray);
 
           setView("board");
-
           setEditEff(false);
           setEditFlag(false);
         }
@@ -255,13 +265,15 @@ function Base({ todoArray, setTodoArray, setView, view }) {
             <h3>Welcome back , Name &#128512;</h3>
           </div>
           <div className="base__header-icons">
-            <img src={search} alt="" />
-            <img src={notification} alt="" />
             <div className="base__header-icons__date">
-              <img src={date} alt="" />
+              <img src={theme === "ligth" ? date : dateDark} alt="" />
               {`${day} ${monthNames[month]} ${year}`}
             </div>
             <img src={profile} alt="" />
+            <MenuOutlined
+              className="projects__none"
+              style={{ color: "#fff", fontSize: "22px" }}
+            />
           </div>
         </div>
         <div className="base__view">
@@ -510,7 +522,6 @@ function Base({ todoArray, setTodoArray, setView, view }) {
           </form>
         </div>
       )}
-      <h1>{activeCard}</h1>
     </section>
   );
 }
