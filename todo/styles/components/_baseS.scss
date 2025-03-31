@@ -406,22 +406,19 @@
     background-color: rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.5);
   }
+  .anticon {
+    color: var(--color-gray-any) !important;
+  }
 }
 .from {
   padding-inline: 5px;
 }
-// @keyframes slideIn {
-//   from {
-//     transform: translateX(-100%);
-//     opacity: 0;
-//     visibility: hidden;
-//   }
-//   to {
-//     transform: translateX(0);
-//     opacity: 1;
-//     visibility: visible;
-//   }
-// }
-// .base {
-//   animation: slideIn 0.5s;
-// }
+
+.burger__mobile {
+  display: none;
+  @include tablet {
+    cursor: pointer;
+    color: var(--color-dark);
+    display: block;
+  }
+}

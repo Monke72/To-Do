@@ -69,8 +69,16 @@ export const todo = [
   },
 ];
 
-function Base({ todoArray, setTodoArray, setView, view }) {
+function Base({
+  todoArray,
+  setTodoArray,
+  setView,
+  view,
+
+  setSiderOpen,
+}) {
   const [theme, setTheme] = useContext(ThemeContext);
+
   console.log(theme);
 
   const [editEff, setEditEff] = useState(false);
@@ -271,8 +279,9 @@ function Base({ todoArray, setTodoArray, setView, view }) {
             </div>
             <img src={profile} alt="" />
             <MenuOutlined
-              className="projects__none"
-              style={{ color: "#fff", fontSize: "22px" }}
+              onClick={() => setSiderOpen((prev) => !prev)}
+              className="burger__mobile"
+              style={{ color: "#232323", fontSize: "22px" }}
             />
           </div>
         </div>

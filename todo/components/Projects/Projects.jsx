@@ -7,10 +7,14 @@ import ligth from "./../../icons/light.svg";
 import ligthD from "./../../icons/ligthD.svg";
 import darkD from "./../../icons/darkD.svg";
 
-function Projects({ todoArray, setView, view }) {
-  const [team, setTeam] = useState(false);
-  const [projects, setProjects] = useState(false);
-  const [tasks, setTasks] = useState(false);
+function Projects({ todoArray, setView, view, siderOpen }) {
+  const [team, setTeam] = useState("deactive");
+  const [projects, setProjects] = useState("deactive");
+  console.log(projects);
+
+  const [tasks, setTasks] = useState("deactive");
+  console.log(tasks);
+
   // const [theme, setTheme] = useState("ligth");
   const [theme, setTheme] = useContext(ThemeContext);
 
@@ -18,16 +22,18 @@ function Projects({ todoArray, setView, view }) {
     setView("add");
   };
 
-  const handleAnimationEnd = () => {
-    return (e) => {
-      if (e.target.classList.contains("deactive")) {
-        e.target.classList.add("hidden");
-      }
-    };
-  };
+  function animationCheck(e, state, setState) {
+    if (state === "active") {
+      console.log(state);
+
+      setState("deactive");
+    } else {
+      setState("active");
+    }
+  }
 
   return (
-    <section className="projects">
+    <section className={`projects ${siderOpen ? "projects__mobile-open" : ""}`}>
       <div className="projects__top-wrapp">
         <div className="projects__top">
           <h1 className="projects__title">Projects️</h1>
@@ -44,21 +50,12 @@ function Projects({ todoArray, setView, view }) {
           <div className="projects__main-team">
             <button
               className="projects__main-chapter"
-              onClick={() => setTeam(!team)}
+              onClick={(e) => animationCheck(e, team, setTeam)}
             >
-              <div
-                className={` projects__main-title ${
-                  team ? "active" : "deactive"
-                }`}
-              >
-                Team
-              </div>
+              <div className={` projects__main-title ${team}`}>Team</div>
             </button>
 
-            <div
-              className={`projects__acc ${team ? "active" : "deactive"}`}
-              onAnimationEnd={handleAnimationEnd()}
-            >
+            <div className={`projects__acc ${team}`}>
               <p>You don't have a team</p>
             </div>
           </div>
@@ -66,20 +63,13 @@ function Projects({ todoArray, setView, view }) {
           <div className="projects__main-projects">
             <button
               className="projects__main-chapter"
-              onClick={() => setProjects(!projects)}
+              onClick={(e) => animationCheck(e, projects, setProjects)}
             >
-              <div
-                className={` projects__main-title ${
-                  projects ? "active" : "deactive"
-                }`}
-              >
+              <div className={` projects__main-title ${projects}`}>
                 Projects
               </div>
             </button>
-            <div
-              className={`projects__acc ${projects ? "active" : "deactive"}`}
-              onAnimationEnd={handleAnimationEnd()}
-            >
+            <div className={`projects__acc ${projects}`}>
               <ul className="projects__main-list">
                 <li className="projects__main-item">
                   <button className="projects__main-btn">
@@ -108,20 +98,11 @@ function Projects({ todoArray, setView, view }) {
           <div className="projects__main-tasks">
             <button
               className="projects__main-chapter"
-              onClick={() => setTasks(!tasks)}
+              onClick={(e) => animationCheck(e, tasks, setTasks)}
             >
-              <div
-                className={` projects__main-title ${
-                  tasks ? "active" : "deactive"
-                }`}
-              >
-                Tasks
-              </div>
+              <div className={` projects__main-title ${tasks}`}>Tasks</div>
             </button>
-            <div
-              className={`projects__acc ${tasks ? "active" : "deactive"}`}
-              onAnimationEnd={handleAnimationEnd()}
-            >
+            <div className={`projects__acc ${tasks}`}>
               <ul className="projects__main-list">
                 <li className="projects__main-item">
                   <button className="projects__main-btn">

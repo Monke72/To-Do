@@ -9,16 +9,24 @@ function App() {
   const [theme, setTheme] = useState("ligth");
   const [view, setView] = useState("board");
   const [todoArray, setTodoArray] = useState(todo);
+  const [siderOpen, setSiderOpen] = useState(false);
 
   return (
     <ThemeContext.Provider value={[theme, setTheme]}>
       <div className={`wrapper ${theme}`}>
-        <Projects todoArray={todoArray} setView={setView} view={view} />
+        <Projects
+          todoArray={todoArray}
+          setView={setView}
+          view={view}
+          siderOpen={siderOpen}
+        />
         <Base
           todoArray={todoArray}
           setTodoArray={setTodoArray}
           view={view}
           setView={setView}
+          setSiderOpen={setSiderOpen}
+          siderOpen={siderOpen}
         />
       </div>
     </ThemeContext.Provider>
