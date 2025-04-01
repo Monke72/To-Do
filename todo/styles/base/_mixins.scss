@@ -13,6 +13,12 @@ $mobile-s: 640px;
 $mobile-xs-above: 501px;
 $mobile-xs: 500px;
 
+@mixin mobile-touch {
+  @media (pointer: none), (pointer: coarse) {
+    @content;
+  }
+}
+
 @mixin mobile-xs-above {
   @media (min-width: $mobile-xs-above) {
     @content;

@@ -24,7 +24,7 @@ function Task({
   const textHead = title.charAt(0).toUpperCase() + title.slice(1);
 
   const [show, setShow] = useState("open");
-  const [theme, setTheme] = useContext(ThemeContext);
+  const [theme] = useContext(ThemeContext);
 
   function deleteTask(e) {
     const newTodoArray = todoArray.filter(
@@ -53,14 +53,14 @@ function Task({
         <div className="task__info-top">
           <h4 className="task__info-top__title">{textHead}</h4>
 
-          {show === "open" && (
-            <button
-              className="task__info-top__btn"
-              onClick={() => setShow("close")}
-            >
-              <img src={theme === "ligth" ? burgerInfo : moreDark} alt="" />
-            </button>
-          )}
+          <button
+            className={`task__info-top__btn ${
+              show === "close" ? "opacity__info" : ""
+            }`}
+            onClick={() => setShow("close")}
+          >
+            <img src={theme === "ligth" ? burgerInfo : moreDark} alt="" />
+          </button>
 
           {show === "close" && (
             <div className="task__modal">

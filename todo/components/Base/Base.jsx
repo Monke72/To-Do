@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import search from "./../../icons/Search.svg";
-import notification from "../../icons/notifications.svg";
 import date from "./../../icons/date.svg";
 import profile from "./../../icons/pr.png";
 import burger from "./../../icons/miniBurger.svg";
@@ -8,6 +6,7 @@ import Task from "../Task/Task";
 import lightBurger from "./../../icons/light-burger.svg";
 import dateDark from "./../../icons/date-dark.svg";
 import { MenuOutlined } from "@ant-design/icons";
+import { CloseOutlined } from "@ant-design/icons";
 
 import { ThemeContext } from "./../../src/App";
 import { useContext } from "react";
@@ -74,10 +73,10 @@ function Base({
   setTodoArray,
   setView,
   view,
-
+  siderOpen,
   setSiderOpen,
 }) {
-  const [theme, setTheme] = useContext(ThemeContext);
+  const [theme] = useContext(ThemeContext);
 
   console.log(theme);
 
@@ -278,11 +277,18 @@ function Base({
               {`${day} ${monthNames[month]} ${year}`}
             </div>
             <img src={profile} alt="" />
-            <MenuOutlined
-              onClick={() => setSiderOpen((prev) => !prev)}
-              className="burger__mobile"
-              style={{ color: "#232323", fontSize: "22px" }}
-            />
+            {!siderOpen ? (
+              <MenuOutlined
+                onClick={() => setSiderOpen((prev) => !prev)}
+                className="burger__mobile"
+                style={{ color: "#232323", fontSize: "22px" }}
+              />
+            ) : (
+              <CloseOutlined
+                style={{ color: "#232323", fontSize: "22px" }}
+                onClick={() => setSiderOpen((prev) => !prev)}
+              />
+            )}
           </div>
         </div>
         <div className="base__view">
@@ -452,6 +458,7 @@ function Base({
             <div className="base__add-line">
               <h4>Select the number of tasks from 7 to 15</h4>
               <InputNumber
+                className="todos__number-input"
                 min={7}
                 max={15}
                 defaultValue={10}
@@ -507,6 +514,7 @@ function Base({
                 tasks
               </h4>
               <InputNumber
+                className="todos__number-input"
                 min={1}
                 max={editFlag ? countTasksAll : countTasksAll - 1}
                 value={countTask}
@@ -514,6 +522,7 @@ function Base({
               />
               <span className="from">out of </span>
               <InputNumber
+                className="todos__number-input"
                 min={countTask + 1}
                 max={15}
                 value={countTasksAll}

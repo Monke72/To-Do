@@ -8,8 +8,14 @@
   @include desktop {
     padding: 12px;
   }
+  @include mobile-s {
+    padding: 7px;
+  }
   &__info {
     padding-bottom: 22px;
+    @include mobile {
+      padding-bottom: 15px;
+    }
   }
 
   &__info-top {
@@ -17,6 +23,10 @@
     align-items: center;
     justify-content: space-between;
     color: var(--color-dark);
+    padding-bottom: 10px;
+    @include mobile {
+      padding-bottom: 1px;
+    }
   }
 
   &__info-text {
@@ -41,6 +51,9 @@
     &__counter {
       font-size: 14px;
       color: var(--color-dark);
+      @include mobile {
+        font-size: 12px;
+      }
     }
   }
 
@@ -50,9 +63,6 @@
     background: var(--color-red);
     border-radius: 8px;
     height: 4px;
-
-    &::before {
-    }
   }
 
   &__date-now {
@@ -65,9 +75,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @include mobile {
+      padding: 14px 13px;
+      font-size: 12px;
+    }
   }
 }
-
+.opacity__info {
+  opacity: 0;
+}
 .task__progress-line__all {
   position: absolute;
   left: 0;
@@ -92,14 +108,20 @@
     background: var(--color-green);
   }
 }
-
+.task__info-top__btn {
+  img {
+    @include mobile-s {
+      max-width: 22px;
+    }
+  }
+}
 .task {
   position: relative;
 
   &__modal {
     position: absolute;
     right: 0px;
-    background-color: var(--color-gray);
+    background-color: #fffafa;
     display: flex;
     gap: 4px;
     flex-direction: column;
@@ -143,5 +165,8 @@
 @include dark {
   .task__progress-line__all {
     background: rgba(28, 29, 34, 0.2);
+  }
+  .task__modal {
+    background-color: #232323;
   }
 }

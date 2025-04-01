@@ -6,6 +6,8 @@ import dark from "./../../icons/dark.svg";
 import ligth from "./../../icons/light.svg";
 import ligthD from "./../../icons/ligthD.svg";
 import darkD from "./../../icons/darkD.svg";
+const width = window.innerWidth;
+console.log(width < 860);
 
 function Projects({ todoArray, setView, view, siderOpen }) {
   const [team, setTeam] = useState("deactive");
@@ -33,7 +35,11 @@ function Projects({ todoArray, setView, view, siderOpen }) {
   }
 
   return (
-    <section className={`projects ${siderOpen ? "projects__mobile-open" : ""}`}>
+    <section
+      className={`projects ${
+        siderOpen && width < 1024 && "projects__mobile-open"
+      } ${!siderOpen && width < 1024 && "projects__mobile-close"} `}
+    >
       <div className="projects__top-wrapp">
         <div className="projects__top">
           <h1 className="projects__title">Projects️</h1>

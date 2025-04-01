@@ -15,4 +15,13 @@
 
   --main-size: 16px;
   --info-size: 14px;
+
+  @include mobile {
+    --main-size: 14px;
+    --info-size: 12px;
+  }
+  @include mobile-s {
+    --main-size: 12px;
+    --info-size: 10px;
+  }
 }

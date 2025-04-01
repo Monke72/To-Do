@@ -21,6 +21,10 @@
     z-index: 111;
     background: #fff;
   }
+  @include mobile {
+    width: 215px;
+    padding: 19px 15px 21px 15px;
+  }
 
   &__top {
     display: flex;
@@ -30,10 +34,10 @@
     h1 {
       font-size: 30px;
       color: var(--color-dark);
+      @include mobile {
+        font-size: 28px;
+      }
     }
-  }
-
-  &__title {
   }
 
   &__top-btn {
@@ -60,9 +64,6 @@
     gap: 25px;
   }
 
-  &__main-team {
-  }
-
   &__main-chapter {
     margin-bottom: 16px;
     width: 100%;
@@ -78,6 +79,12 @@
       height: 1px;
       right: 0;
       rotate: -45deg;
+      @include mobile {
+        bottom: 7px;
+      }
+      @include mobile-s {
+        bottom: 5px;
+      }
     }
     &::before {
       content: "";
@@ -121,9 +128,6 @@
     overflow: hidden;
   }
 
-  &__main-projects {
-  }
-
   &__main-list {
     display: flex;
     flex-direction: column;
@@ -133,22 +137,13 @@
     padding-block: 10px;
   }
 
-  &__main-item {
-  }
-
-  &__main-tasks {
-  }
-
   &__theme {
     width: 100%;
     display: flex;
     padding: 4px;
-  }
-
-  &__theme-light {
-  }
-
-  &__theme-dark {
+    @include mobile {
+      padding: 6px;
+    }
   }
 }
 
@@ -212,6 +207,14 @@
     display: none;
   }
 }
+@keyframes opacityProjects {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 .projects__acc {
   display: none;
@@ -251,6 +254,10 @@
       width: 91px;
       left: 9px;
     }
+    @include mobile {
+      width: 81px;
+      left: 6px;
+    }
   }
   span {
     position: absolute;
@@ -269,6 +276,9 @@
     @include desktop {
       left: 19px;
     }
+    @include mobile {
+      left: 13px;
+    }
   }
   .dark__btn {
     right: -25px;
@@ -276,6 +286,9 @@
     transition: 0.3s;
     @include desktop {
       right: -39px;
+    }
+    @include mobile {
+      right: -50px;
     }
   }
 }
@@ -295,12 +308,18 @@ input:checked + .theme__label::after {
   @include desktop {
     left: 186px;
   }
+  @include mobile {
+    left: 160px;
+  }
 }
 
 .theme__label:active::after {
   width: 140px;
   @include tablet {
     width: 100px;
+  }
+  @include mobile {
+    width: 86px;
   }
 }
 
@@ -326,6 +345,9 @@ input:checked + .theme__label .dark__btn {
   }
   .projects__main-list {
     border-left: 2px solid var(--color-gray-any);
+    @include mobile {
+      font-size: 12px;
+    }
   }
   .projects__main-btn::before {
     background-color: var(--color-gray-any);
@@ -365,6 +387,20 @@ input:checked + .theme__label .dark__btn {
     color: unset;
   }
 }
+@keyframes projClose {
+  from {
+    opacity: 1;
+    display: block;
+  }
+  to {
+    opacity: 0;
+    display: none;
+  }
+}
 .projects__mobile-open {
   display: flex;
+  animation: opacityProjects 0.5s;
+}
+.projects.projects__mobile-close {
+  animation: projClose 0.5s;
 }
