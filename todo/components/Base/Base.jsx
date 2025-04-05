@@ -276,16 +276,15 @@ function Base({
               <img src={theme === "ligth" ? date : dateDark} alt="" />
               {`${day} ${monthNames[month]} ${year}`}
             </div>
-            <img src={profile} alt="" />
+            <img className="base__people-img" src={profile} alt="" />
             {!siderOpen ? (
               <MenuOutlined
                 onClick={() => setSiderOpen((prev) => !prev)}
                 className="burger__mobile"
-                style={{ color: "#232323", fontSize: "22px" }}
               />
             ) : (
               <CloseOutlined
-                style={{ color: "#232323", fontSize: "22px" }}
+                className="burger__mobile"
                 onClick={() => setSiderOpen((prev) => !prev)}
               />
             )}
@@ -397,6 +396,11 @@ function Base({
                   ({todoArray.filter((item) => item.status === "done").length})
                 </span>
               </p>
+              <div className="done__opp">
+                <div className="add__task">
+                  <p className="base__main-new__text">Add new task</p>
+                </div>
+              </div>
             </div>
             <DropArea onDrop={() => onDrop("done", 0)} />
             <div className="base__main-tasks">

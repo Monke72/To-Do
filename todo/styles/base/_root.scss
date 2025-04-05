@@ -24,4 +24,8 @@
     --main-size: 12px;
     --info-size: 10px;
   }
+  @include mobile-xs {
+    --main-size: 11px;
+    --info-size: 9px;
+  }
 }

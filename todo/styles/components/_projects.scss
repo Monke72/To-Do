@@ -23,7 +23,7 @@
   }
   @include mobile {
     width: 215px;
-    padding: 19px 15px 21px 15px;
+    padding: 19px 15px 7px 15px;
   }
 
   &__top {
@@ -267,6 +267,9 @@
     top: 10px;
     display: flex;
     gap: 5px;
+    @include mobile-s {
+      top: 13px;
+    }
   }
   .ligth__btn {
     left: 40px;

@@ -11,10 +11,16 @@
   @include mobile-s {
     padding: 7px;
   }
+  @include mobile-xs {
+    padding: 5px;
+  }
   &__info {
     padding-bottom: 22px;
     @include mobile {
       padding-bottom: 15px;
+    }
+    @include mobile-xs {
+      padding-bottom: 10px;
     }
   }
 
@@ -35,6 +41,9 @@
 
   &__progress {
     padding-bottom: 20px;
+    @include mobile-xs {
+      padding-bottom: 10px;
+    }
   }
 
   &__progress-count {
@@ -44,6 +53,7 @@
     padding-bottom: 10px;
     &__text {
       display: flex;
+      align-items: center;
       p {
         font-family: var(--any-font);
       }
@@ -53,6 +63,9 @@
       color: var(--color-dark);
       @include mobile {
         font-size: 12px;
+      }
+      @include mobile-xs {
+        font-size: 10px;
       }
     }
   }
@@ -78,6 +91,11 @@
     @include mobile {
       padding: 14px 13px;
       font-size: 12px;
+    }
+    @include mobile-xs {
+      padding: 2px 6px;
+      font-size: 10px;
+      height: 20px;
     }
   }
 }
@@ -135,6 +153,10 @@
     @include desktop {
       padding: 4px 7px;
     }
+    @include mobile-s {
+      gap: 0;
+      padding: 2px 4px 3px 3px;
+    }
   }
 
   &__modal-exit {
@@ -147,6 +169,11 @@
     @include desktop {
       right: -39px;
       top: -4px;
+    }
+    @include mobile {
+      right: -29px;
+      top: -2px;
+      font-size: 11px;
     }
   }
 
@@ -168,5 +195,20 @@
   }
   .task__modal {
     background-color: #232323;
+  }
+}
+.task__info-text,
+.task__info-top__title {
+  word-break: break-word;
+}
+.task__progress-count__text {
+  @include mobile-xs {
+    gap: 0px;
+  }
+}
+.task__info-top__title,
+.task__info-text {
+  @include mobile-xs {
+    line-height: 1.3;
   }
 }

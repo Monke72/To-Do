@@ -12,6 +12,9 @@
   @include mobile-s {
     padding: 15px 10px 22px 10px;
   }
+  @include mobile-xs {
+    padding: 15px 5px 22px 5px;
+  }
   &__top {
     display: flex;
     flex-direction: column;
@@ -36,9 +39,6 @@
     }
   }
 
-  &__header-welcome {
-  }
-
   &__header-icons {
     display: flex;
     justify-content: center;
@@ -47,6 +47,18 @@
     &__date {
       display: flex;
       gap: 11px;
+      align-items: center;
+      img {
+        @include mobile-xs {
+          width: 15px;
+        }
+      }
+    }
+    @include mobile-s {
+      gap: 15px;
+    }
+    @include mobile-xs {
+      gap: 8px;
     }
   }
 
@@ -54,6 +66,9 @@
     display: flex;
     border-bottom: 2px solid rgba(28, 29, 34, 0.08);
     margin-bottom: 20px;
+    @include mobile-s {
+      justify-content: space-around;
+    }
   }
 
   &__view-board,
@@ -65,6 +80,12 @@
     gap: 10px;
     padding-inline: 14px;
     padding-bottom: 19px;
+    @include mobile-s {
+      width: 50%;
+    }
+    @include mobile-xs {
+      padding-bottom: 11px;
+    }
 
     @include hover {
       &::after {
@@ -105,9 +126,6 @@
     }
   }
 
-  &__view-add {
-  }
-
   &__main {
     display: flex;
     flex-direction: row;
@@ -125,6 +143,9 @@
     @include mobile-s {
       height: 83%;
       gap: 10px;
+    }
+    @include mobile-xs {
+      gap: 1.4vw;
     }
     &-tasks {
       max-height: 70vh;
@@ -155,6 +176,9 @@
     @include mobile-s {
       padding: 15px 7px 12px 7px;
     }
+    @include mobile-xs {
+      padding: 15px 1.2vw 12px 1.2vw;
+    }
     &__top {
       display: flex;
       justify-content: space-between;
@@ -178,15 +202,6 @@
       color: var(--color-dark);
     }
   }
-
-  &__main-todo {
-  }
-
-  &__main-progress {
-  }
-
-  &__main-done {
-  }
 }
 .add {
   &__task {
@@ -208,12 +223,6 @@
     align-items: center;
     background: rgba(28, 29, 34, 0.08);
   }
-
-  &__add-progress {
-  }
-
-  &__add-done {
-  }
 }
 //add
 
@@ -227,6 +236,9 @@
     }
     @include mobile-s {
       gap: 15px;
+    }
+    @include mobile-xs {
+      gap: 7px;
     }
     &-btn {
       padding: 8px 8px;
@@ -277,24 +289,18 @@
     }
   }
 
-  &__add-header {
-  }
-
-  &__add-text {
-  }
-
   &__add-line {
     padding-bottom: 30px;
     h4 {
       padding-bottom: 7px;
+      @include mobile-xs {
+        font-size: 10px;
+      }
     }
     @include mobile {
       font-size: 12px;
       padding-bottom: 15px;
     }
-  }
-
-  &__add-btn {
   }
 
   &__add-progress {
@@ -318,6 +324,9 @@
   background: rgb(255, 255, 255);
   @include mobile {
     padding: 15px;
+  }
+  @include mobile-xs {
+    padding: 12px 7px;
   }
 }
 
@@ -447,6 +456,7 @@
   }
   .base__header-icons__date {
     color: var(--color-gray-any);
+    align-items: center;
   }
   .base__view-board span {
     background-color: rgba(255, 255, 255, 0.1);
@@ -475,5 +485,37 @@
 .todos__number-input {
   @include mobile {
     max-width: 70px;
+  }
+  @include mobile-xs {
+    max-width: 40px;
+  }
+}
+.ant-input-number-input {
+  @include mobile-xs {
+    padding: 0px 10px !important;
+  }
+}
+.done__opp {
+  opacity: 0;
+  cursor: default;
+}
+.base__people-img {
+  @include mobile-xs {
+    width: 27px;
+  }
+}
+.burger__mobile {
+  color: "#232323";
+  font-size: 22px;
+  @include mobile-xs {
+    font-size: 18px;
+  }
+}
+.base textarea,
+.base__add-title__input {
+  @include mobile-xs {
+    width: 150px;
+    min-width: 150px;
+    max-width: 150px;
   }
 }
