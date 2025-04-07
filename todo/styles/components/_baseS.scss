@@ -170,6 +170,7 @@
     border: 2px dashed rgba(28, 29, 34, 0.08);
     border-radius: 12px;
     width: 100%;
+    overflow: hidden;
     @include desktop {
       padding: 15px 12px 12px 12px;
     }
@@ -365,6 +366,18 @@
   margin-block: 15px;
   opacity: 1;
   transition: all 0.2s;
+  @include desktop {
+    height: 185px;
+  }
+  @include mobile {
+    height: 164px;
+  }
+  @include mobile-s {
+    height: 145px;
+  }
+  @include mobile-xs {
+    height: 120px;
+  }
 }
 .hide__drop {
   opacity: 0;
@@ -487,12 +500,17 @@
     max-width: 70px;
   }
   @include mobile-xs {
-    max-width: 40px;
+    max-width: 36px;
   }
 }
 .ant-input-number-input {
   @include mobile-xs {
     padding: 0px 10px !important;
+  }
+}
+.ant-input-number-input-wrap {
+  @include mobile-xs {
+    font-size: 12px;
   }
 }
 .done__opp {

@@ -154,11 +154,20 @@ function Projects({ todoArray, setView, view, siderOpen }) {
           onClick={() => setTheme(theme === "ligth" ? "dark" : "ligth")}
         >
           <span className=" ligth__btn">
-            <img src={theme === "dark" ? ligthD : ligth} alt="" /> ligth
+            <img
+              className="theme__img"
+              src={theme === "dark" ? ligthD : ligth}
+              alt=""
+            />{" "}
+            ligth
           </span>
           <span className="dark__btn">
             {" "}
-            <img src={theme === "dark" ? darkD : dark} alt="" />
+            <img
+              className="theme__img"
+              src={theme === "dark" ? darkD : dark}
+              alt=""
+            />
             dark
           </span>
         </label>

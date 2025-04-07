@@ -25,6 +25,9 @@
     width: 215px;
     padding: 19px 15px 7px 15px;
   }
+  @include mobile-s {
+    width: 185px;
+  }
 
   &__top {
     display: flex;
@@ -36,6 +39,12 @@
       color: var(--color-dark);
       @include mobile {
         font-size: 28px;
+      }
+      @include mobile-s {
+        font-size: 24px;
+      }
+      @include mobile-xs {
+        font-size: 21px;
       }
     }
   }
@@ -56,12 +65,26 @@
       cursor: default;
       opacity: 0.5;
     }
+    @include mobile-s {
+      font-size: 18px;
+      width: 25px;
+      height: 25px;
+    }
   }
 
   &__main {
     display: flex;
     flex-direction: column;
     gap: 25px;
+    @include mobile {
+      gap: 15px;
+    }
+    @include mobile-s {
+      gap: 12px;
+    }
+    @include mobile-xs {
+      gap: 10px;
+    }
   }
 
   &__main-chapter {
@@ -84,6 +107,9 @@
       }
       @include mobile-s {
         bottom: 5px;
+      }
+      @include mobile-xs {
+        bottom: 3px;
       }
     }
     &::before {
@@ -108,6 +134,9 @@
     color: var(--color-gray);
     border-radius: 18px;
     transition: all 0.2s;
+    @include tablet {
+      padding: 3px 7px;
+    }
 
     &::before {
       content: "";
@@ -135,6 +164,19 @@
     border-left: 2px solid rgba(28, 29, 34, 0.1);
     padding-left: 30px;
     padding-block: 10px;
+    @include tablet {
+      gap: 7px;
+      padding-block: 5px;
+    }
+    @include mobile {
+      font-size: 12px;
+    }
+    @include mobile-s {
+      font-size: 11px;
+    }
+    @include mobile-xs {
+      font-size: 10px;
+    }
   }
 
   &__theme {
@@ -240,6 +282,13 @@
   border-radius: 22px;
   cursor: pointer;
   transition: all 0.5s;
+  @include desktop-above {
+    height: 55px;
+    border-radius: 25px;
+  }
+  @include mobile-s {
+    height: 45px;
+  }
   &:after {
     content: "";
     width: 127px;
@@ -250,6 +299,11 @@
     background: #fff;
     border-radius: 18px;
     transition: all 0.5s;
+    @include desktop-above {
+      height: 43px;
+      border-radius: 21px;
+      left: 7px;
+    }
     @include desktop {
       width: 91px;
       left: 9px;
@@ -257,6 +311,9 @@
     @include mobile {
       width: 81px;
       left: 6px;
+    }
+    @include mobile-s {
+      width: 65px;
     }
   }
   span {
@@ -267,8 +324,13 @@
     top: 10px;
     display: flex;
     gap: 5px;
+    align-items: center;
+    @include desktop-above {
+      top: 14px;
+    }
     @include mobile-s {
       top: 13px;
+      gap: 2px;
     }
   }
   .ligth__btn {
@@ -293,6 +355,9 @@
     @include mobile {
       right: -50px;
     }
+    @include mobile-s {
+      right: -63px;
+    }
   }
 }
 .darkmode__toggle {
@@ -314,6 +379,9 @@ input:checked + .theme__label::after {
   @include mobile {
     left: 160px;
   }
+  @include mobile-s {
+    left: 130px;
+  }
 }
 
 .theme__label:active::after {
@@ -323,6 +391,9 @@ input:checked + .theme__label::after {
   }
   @include mobile {
     width: 86px;
+  }
+  @include mobile-s {
+    width: 73px;
   }
 }
 
@@ -348,9 +419,6 @@ input:checked + .theme__label .dark__btn {
   }
   .projects__main-list {
     border-left: 2px solid var(--color-gray-any);
-    @include mobile {
-      font-size: 12px;
-    }
   }
   .projects__main-btn::before {
     background-color: var(--color-gray-any);
@@ -406,4 +474,9 @@ input:checked + .theme__label .dark__btn {
 }
 .projects.projects__mobile-close {
   animation: projClose 0.5s;
+}
+.theme__img {
+  @include mobile-s {
+    max-width: 16px;
+  }
 }

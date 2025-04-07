@@ -203,7 +203,7 @@
 }
 .task__progress-count__text {
   @include mobile-xs {
-    gap: 0px;
+    gap: 3px;
   }
 }
 .task__info-top__title,
